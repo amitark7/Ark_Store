@@ -29,7 +29,7 @@ export const Hometabs = () => {
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarIcon: ({focused, size, color}) => (
+          tabBarIcon: ({focused}) => (
             <CustomIcon
               name="home"
               size={32}
