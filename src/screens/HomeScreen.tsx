@@ -82,7 +82,9 @@ const HomeScreen = ({navigation}:any) => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item}) => (
             <TouchableOpacity style={styles.ProductList} onPress={()=>{
-              navigation.push('Details')
+              navigation.push('Details',{
+                item
+              })
             }}>
               <Image style={styles.productImage} source={{uri:item.thumbnail}}/>
               <View style={styles.productInnerContainer}>
