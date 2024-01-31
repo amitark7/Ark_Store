@@ -9,6 +9,8 @@ import {
 import React, {useState} from 'react';
 import HeaderBar from '../component/HeaderBar';
 import CustomIcon from '../component/CustomIcon';
+import { productList } from '../assets/data';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 const HomeScreen = () => {
   const [category, setCategory] = useState([
@@ -20,7 +22,7 @@ const HomeScreen = () => {
     'Ladies Wear',
   ]);
   const [selectCategory, setSelectCategory] = useState('Home');
-
+  const TabHeight=useBottomTabBarHeight()
   return (
     <View style={styles.container}>
       <HeaderBar title="" />
@@ -64,6 +66,19 @@ const HomeScreen = () => {
           </TouchableOpacity>
         )}
       />
+      <View>
+        <FlatList
+        showsVerticalScrollIndicator={false}
+        data={productList}
+        numColumns={3}
+        keyExtractor={(item,index)=>index.toString()}
+        renderItem={({item})=>(
+          <TouchableOpacity style={[styles.ProductList]}>
+            <Text>{item.title}</Text>
+          </TouchableOpacity>
+        )}
+        />
+      </View>
     </View>
   );
 };
@@ -125,4 +140,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth:2
   },
+  ProductList:{
+    height:100,
+    width:100,
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor:'red',
+    margin:10
+  }
 });
