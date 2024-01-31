@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+
 import React from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
@@ -14,4 +14,3 @@ const CustomIcon: React.FC<CustomIconProp> = ({name, color, size}) => {
 
 export default CustomIcon;
 
-const styles = StyleSheet.create({});

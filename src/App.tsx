@@ -15,8 +15,16 @@ const Tab = createBottomTabNavigator();
 
 export const Hometabs = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} options={{tabBarIcon:({size,color})=>(<CustomIcon name='home' size={size} color={color}/>)}}/>
+    <Tab.Navigator screenOptions={{headerShown:false}}>
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: ({size, color}) => (
+            <CustomIcon name="home" size={18} color={'#000'} />
+          ),
+        }}
+      />
       <Tab.Screen name="Cart" component={CartScreen} />
       <Tab.Screen name="Favorite" component={FavoriteScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
@@ -26,8 +34,13 @@ export const Hometabs = () => {
 const App = () => {
   return (
     <NavigationContainer>
+      <CustomIcon name='search' size={20} color='#000'/>
       <Stack.Navigator>
-        <Stack.Screen name="Hometabs" component={Hometabs} />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Hometabs"
+          component={Hometabs}
+        />
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
