@@ -57,7 +57,10 @@ const DetailsScreen = ({route, navigation}: any) => {
           />
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.titleTxt}>{title}</Text>
+          <View style={styles.topContainer}>
+            <Text style={styles.titleTxt}>{title}</Text>
+            <Text style={styles.ratingTxt}>⭐ {rating}</Text>
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -68,7 +71,7 @@ export default DetailsScreen;
 
 const styles = StyleSheet.create({
   Container: {
-    flex:1
+    flex: 1,
   },
   imageContainer: {
     position: 'relative',
@@ -108,12 +111,22 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   textContainer: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 14,
     marginTop: 12,
   },
+  topContainer:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center'
+  },
   titleTxt: {
-    fontSize: 26,
+    fontSize: 24,
     color: '#000',
     fontWeight: 'bold',
   },
+  ratingTxt:{
+    color:'#000',
+    fontWeight:'bold',
+    fontSize:20
+  }
 });
