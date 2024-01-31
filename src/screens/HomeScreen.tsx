@@ -1,24 +1,69 @@
 import {
+  FlatList,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import HeaderBar from '../component/HeaderBar';
 import CustomIcon from '../component/CustomIcon';
 
 const HomeScreen = () => {
+  const [category, setCategory] = useState([
+    'All',
+    'Smartphones',
+    'Headphones',
+    'Laptops',
+    'Mens Wear',
+    'Ladies Wear',
+  ]);
+  const [selectCategory, setSelectCategory] = useState('Home');
+
   return (
     <View style={styles.container}>
       <HeaderBar title="" />
       <View style={styles.inputContainer}>
-        <TextInput style={styles.input} placeholder="Search" />
+        <TextInput
+          style={styles.input}
+          placeholder="Search"
+          placeholderTextColor={'grey'}
+        />
         <TouchableOpacity style={styles.searchButton}>
           <CustomIcon name="search" size={30} color="#616C6F" />
         </TouchableOpacity>
       </View>
+      <View style={styles.TitleContainer}>
+        <Text style={styles.titleTxt}>Find the best</Text>
+        <Text style={styles.titleTxt}>Product For You</Text>
+      </View>
+      <Text style={styles.CategoryTxt}>Categories</Text>
+      <FlatList
+        horizontal
+        style={styles.CategoryContainer}
+        data={category}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item}) => (
+          <TouchableOpacity
+            style={[styles.CategoryList]}
+            onPress={() => {
+              setSelectCategory(item);
+            }}>
+            <Text
+              style={[
+                styles.CategoryListText,
+                {
+                  backgroundColor: selectCategory === item ? '#2ecc72' : '#fff',
+                  color: selectCategory === item ? '#fff' : '#000',
+                  borderColor: selectCategory === item ?'#2ecc72':'#000' 
+                },
+              ]}>
+              {item}
+            </Text>
+          </TouchableOpacity>
+        )}
+      />
     </View>
   );
 };
@@ -32,19 +77,52 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   inputContainer: {
-    position:'relative',
-    paddingHorizontal:20
+    position: 'relative',
+    paddingHorizontal: 10,
   },
   input: {
     width: '100%',
-    borderRadius: 10,
-    paddingLeft: 10,
+    borderRadius: 14,
+    paddingHorizontal: 16,
     backgroundColor: '#EAF0F1',
     marginVertical: 20,
+    paddingVertical: 14,
+    fontSize: 17,
   },
-  searchButton:{
-    position:'absolute',
-    right:'8%',
-    top:'34%'
-  }
+  searchButton: {
+    position: 'absolute',
+    right: '8%',
+    top: '34%',
+  },
+  TitleContainer: {
+    paddingHorizontal: 10,
+  },
+  titleTxt: {
+    fontSize: 30,
+    fontWeight: '700',
+  },
+  CategoryTxt: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#000',
+    marginTop: 18,
+    paddingHorizontal: 10,
+  },
+  CategoryContainer: {
+    flexGrow: 0,
+    paddingLeft:5,
+    marginTop:4
+  },
+  CategoryList: {
+    marginHorizontal: 4,
+    marginVertical: 8,
+  },
+  CategoryListText: {
+    fontSize: 15,
+    color: '#000',
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 8,
+    borderWidth:2
+  },
 });

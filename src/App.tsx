@@ -21,7 +21,9 @@ export const Hometabs = () => {
         tabBarShowLabel: false,
         tabBarStyle:{
           height:80,
-        }
+          position:'absolute',
+        },
+        tabBarHideOnKeyboard:true
       }}>
       <Tab.Screen
         name="Home"
