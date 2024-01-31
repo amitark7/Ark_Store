@@ -15,8 +15,8 @@ const HomeScreen = () => {
       <HeaderBar title="" />
       <View style={styles.inputContainer}>
         <TextInput style={styles.input} placeholder="Search" />
-        <TouchableOpacity>
-          <CustomIcon name="search" size={24} color="#616C6F" />
+        <TouchableOpacity style={styles.searchButton}>
+          <CustomIcon name="search" size={30} color="#616C6F" />
         </TouchableOpacity>
       </View>
     </View>
@@ -29,9 +29,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
   },
-  inputContainer: {},
+  inputContainer: {
+    position:'relative',
+    paddingHorizontal:20
+  },
   input: {
     width: '100%',
     borderRadius: 10,
@@ -39,4 +42,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#EAF0F1',
     marginVertical: 20,
   },
+  searchButton:{
+    position:'absolute',
+    right:'8%',
+    top:'34%'
+  }
 });
