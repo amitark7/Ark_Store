@@ -55,7 +55,7 @@ export const Hometabs = () => {
         name="Favorite"
         component={FavoriteScreen}
         options={{
-          tabBarIcon: ({focused, size, color}) => (
+          tabBarIcon: ({focused}) => (
             <CustomIcon
               name="favorite"
               size={32}
