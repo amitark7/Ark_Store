@@ -1,5 +1,6 @@
 import {
   FlatList,
+  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -73,10 +74,12 @@ const HomeScreen = () => {
         <FlatList
           showsVerticalScrollIndicator={false}
           data={productList}
-          numColumns={3}
+          key={''}
+          numColumns={2}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item}) => (
             <TouchableOpacity style={[styles.ProductList]}>
+              <Image style={styles.productImage} source={{uri:item.thumbnail}}/>
               <Text>{item.title}</Text>
             </TouchableOpacity>
           )}
@@ -144,11 +147,16 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   ProductList: {
-    height: 100,
-    width: 100,
+    width:'45%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'red',
     margin: 10,
   },
+  productImage:{
+    width:'100%',
+    height:150,
+    borderRadius:10,
+    objectFit:'contain'
+  }
 });
