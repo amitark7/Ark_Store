@@ -42,7 +42,7 @@ export const Hometabs = () => {
         name="Cart"
         component={CartScreen}
         options={{
-          tabBarIcon: ({focused, size, color}) => (
+          tabBarIcon: ({focused}) => (
             <CustomIcon
               name="shopping-bag"
               size={32}
