@@ -84,9 +84,8 @@ const App = () => {
   return (
     <NavigationContainer>
       <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'}/>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown:false}}>
         <Stack.Screen
-          options={{headerShown: false}}
           name="Hometabs"
           component={Hometabs}
         />

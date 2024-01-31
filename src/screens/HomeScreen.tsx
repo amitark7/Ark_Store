@@ -1,6 +1,7 @@
 import {
   FlatList,
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -13,7 +14,7 @@ import CustomIcon from '../component/CustomIcon';
 import {productList} from '../assets/data';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}:any) => {
   const [category, setCategory] = useState([
     'All',
     'Smartphones',
@@ -25,7 +26,7 @@ const HomeScreen = () => {
   const [selectCategory, setSelectCategory] = useState('All');
   const TabHeight = useBottomTabBarHeight();
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <HeaderBar title="" />
       <View style={styles.inputContainer}>
         <TextInput
@@ -73,22 +74,27 @@ const HomeScreen = () => {
       <View>
         <FlatList
           showsVerticalScrollIndicator={false}
+          contentContainerStyle={[styles.ProductContainer,{marginBottom:TabHeight}]}
           data={productList}
           key={''}
           numColumns={2}
+          scrollEnabled={false}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item}) => (
-            <TouchableOpacity style={[styles.ProductList]}>
+            <TouchableOpacity style={styles.ProductList} onPress={()=>{
+              navigation.push('Details')
+            }}>
               <Image style={styles.productImage} source={{uri:item.thumbnail}}/>
-              <View>
-                <Text>{item.title}</Text>
-                <Text>{item.rating}</Text>
+              <View style={styles.productInnerContainer}>
+                <Text style={styles.productTitle}>{item.title.substring(0,11)}</Text>
+                <Text style={styles.ratingTxt}>⭐ {item.rating}</Text>
               </View>
+              <Text style={styles.priceTxt}>$ {item.price}</Text>
             </TouchableOpacity>
           )}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -149,10 +155,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 2,
   },
+  ProductContainer:{
+    flexGrow:1,
+  },
   ProductList: {
     width:'48%',
-    justifyContent: 'center',
-    alignItems: 'center',
     marginVertical: 8,
     marginHorizontal:4
   },
@@ -161,5 +168,25 @@ const styles = StyleSheet.create({
     height:150,
     borderRadius:10,
     objectFit:'fill',
+  },
+  productInnerContainer:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+    width:'100%',
+    marginVertical:6
+  },
+  productTitle:{
+    fontSize:16,
+    fontWeight:'400'
+  },
+  ratingTxt:{
+    color:'#000',
+    fontWeight:'bold'
+  },
+  priceTxt:{
+    fontSize:20,
+    fontWeight:'bold',
+    color:'#000'
   }
 });
