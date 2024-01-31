@@ -44,7 +44,7 @@ const DetailsScreen = ({route, navigation}: any) => {
                 style={[
                   styles.imageList,
                   {
-                    borderColor: selectPic == item ? '#F4C724' : '#grey',
+                    borderColor: selectPic == item ? '#F4C724' : '#DAE0E2',
                   },
                 ]}
                 onPress={() => {
