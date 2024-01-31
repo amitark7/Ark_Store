@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -15,25 +15,73 @@ const Tab = createBottomTabNavigator();
 
 export const Hometabs = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown:false}}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarStyle:{
+          height:80,
+        }
+      }}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarIcon: ({size, color}) => (
-            <CustomIcon name="home" size={26} color={'#000'} />
+          tabBarIcon: ({focused, size, color}) => (
+            <CustomIcon
+              name="home"
+              size={32}
+              color={focused ? '#2ecc72' : '#A4B0BD'}
+            />
           ),
         }}
       />
-      <Tab.Screen name="Cart" component={CartScreen} />
-      <Tab.Screen name="Favorite" component={FavoriteScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{
+          tabBarIcon: ({focused, size, color}) => (
+            <CustomIcon
+              name="shopping-bag"
+              size={32}
+              color={focused ? '#2ecc72' : '#A4B0BD'}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Favorite"
+        component={FavoriteScreen}
+        options={{
+          tabBarIcon: ({focused, size, color}) => (
+            <CustomIcon
+              name="favorite"
+              size={32}
+              color={focused ? '#2ecc72' : '#A4B0BD'}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({focused, size, color}) => (
+            <CustomIcon
+              name="person"
+              size={32}
+              color={focused ? '#2ecc72' : '#A4B0BD'}
+            />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
 const App = () => {
   return (
     <NavigationContainer>
+      <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'}/>
       <Stack.Navigator>
         <Stack.Screen
           options={{headerShown: false}}

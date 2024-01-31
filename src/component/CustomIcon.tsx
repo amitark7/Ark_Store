@@ -1,6 +1,6 @@
 
 import React from 'react';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 interface CustomIconProp {
   name: string;
@@ -9,7 +9,7 @@ interface CustomIconProp {
 }
 
 const CustomIcon: React.FC<CustomIconProp> = ({name, color, size}) => {
-  return <FontAwesome5 name={name} color={color} size={size} />;
+  return <MaterialIcons name={name} color={color} size={size} />;
 };
 
 export default CustomIcon;
