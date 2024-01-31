@@ -22,7 +22,7 @@ const HomeScreen = () => {
     'Mens Wear',
     'Ladies Wear',
   ]);
-  const [selectCategory, setSelectCategory] = useState('Home');
+  const [selectCategory, setSelectCategory] = useState('All');
   const TabHeight = useBottomTabBarHeight();
   return (
     <View style={styles.container}>
@@ -80,7 +80,10 @@ const HomeScreen = () => {
           renderItem={({item}) => (
             <TouchableOpacity style={[styles.ProductList]}>
               <Image style={styles.productImage} source={{uri:item.thumbnail}}/>
-              <Text>{item.title}</Text>
+              <View>
+                <Text>{item.title}</Text>
+                <Text>{item.rating}</Text>
+              </View>
             </TouchableOpacity>
           )}
         />
@@ -147,16 +150,16 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   ProductList: {
-    width:'45%',
+    width:'48%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
-    margin: 10,
+    marginVertical: 8,
+    marginHorizontal:4
   },
   productImage:{
     width:'100%',
     height:150,
     borderRadius:10,
-    objectFit:'contain'
+    objectFit:'fill',
   }
 });
