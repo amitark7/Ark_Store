@@ -8,6 +8,7 @@ import CartScreen from './screens/CartScreen';
 import FavoriteScreen from './screens/FavoriteScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import DetailsScreen from './screens/DetailsScreen';
+import CustomIcon from './component/CustomIcon';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -15,7 +16,7 @@ const Tab = createBottomTabNavigator();
 export const Hometabs = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} options={{tabBarIcon:}}/>
+      <Tab.Screen name="Home" component={HomeScreen} options={{tabBarIcon:({size,color})=>(<CustomIcon name='home' size={size} color={color}/>)}}/>
       <Tab.Screen name="Cart" component={CartScreen} />
       <Tab.Screen name="Favorite" component={FavoriteScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
