@@ -21,7 +21,7 @@ export const Hometabs = () => {
         component={HomeScreen}
         options={{
           tabBarIcon: ({size, color}) => (
-            <CustomIcon name="home" size={18} color={'#000'} />
+            <CustomIcon name="home" size={26} color={'#000'} />
           ),
         }}
       />
@@ -34,7 +34,6 @@ export const Hometabs = () => {
 const App = () => {
   return (
     <NavigationContainer>
-      <CustomIcon name='search' size={20} color='#000'/>
       <Stack.Navigator>
         <Stack.Screen
           options={{headerShown: false}}
