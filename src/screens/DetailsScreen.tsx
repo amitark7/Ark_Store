@@ -44,7 +44,7 @@ const DetailsScreen = ({route, navigation}: any) => {
                 style={[
                   styles.imageList,
                   {
-                    borderColor: selectPic == item ? '#F4C724' : '#DAE0E2',
+                    borderColor: selectPic == item ? '#2ecc72' : '#DAE0E2',
                   },
                 ]}
                 onPress={() => {
@@ -67,7 +67,9 @@ const DetailsScreen = ({route, navigation}: any) => {
 export default DetailsScreen;
 
 const styles = StyleSheet.create({
-  Container: {},
+  Container: {
+    flex:1
+  },
   imageContainer: {
     position: 'relative',
   },
