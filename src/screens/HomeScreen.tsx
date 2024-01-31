@@ -9,8 +9,8 @@ import {
 import React, {useState} from 'react';
 import HeaderBar from '../component/HeaderBar';
 import CustomIcon from '../component/CustomIcon';
-import { productList } from '../assets/data';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import {productList} from '../assets/data';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 const HomeScreen = () => {
   const [category, setCategory] = useState([
@@ -22,7 +22,7 @@ const HomeScreen = () => {
     'Ladies Wear',
   ]);
   const [selectCategory, setSelectCategory] = useState('Home');
-  const TabHeight=useBottomTabBarHeight()
+  const TabHeight = useBottomTabBarHeight();
   return (
     <View style={styles.container}>
       <HeaderBar title="" />
@@ -41,42 +41,45 @@ const HomeScreen = () => {
         <Text style={styles.titleTxt}>Product For You</Text>
       </View>
       <Text style={styles.CategoryTxt}>Categories</Text>
-      <FlatList
-        horizontal
-        style={styles.CategoryContainer}
-        data={category}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            style={[styles.CategoryList]}
-            onPress={() => {
-              setSelectCategory(item);
-            }}>
-            <Text
-              style={[
-                styles.CategoryListText,
-                {
-                  backgroundColor: selectCategory === item ? '#2ecc72' : '#fff',
-                  color: selectCategory === item ? '#fff' : '#000',
-                  borderColor: selectCategory === item ?'#2ecc72':'#000' 
-                },
-              ]}>
-              {item}
-            </Text>
-          </TouchableOpacity>
-        )}
-      />
       <View>
         <FlatList
-        showsVerticalScrollIndicator={false}
-        data={productList}
-        numColumns={3}
-        keyExtractor={(item,index)=>index.toString()}
-        renderItem={({item})=>(
-          <TouchableOpacity style={[styles.ProductList]}>
-            <Text>{item.title}</Text>
-          </TouchableOpacity>
-        )}
+          horizontal
+          style={styles.CategoryContainer}
+          data={category}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              style={[styles.CategoryList]}
+              onPress={() => {
+                setSelectCategory(item);
+              }}>
+              <Text
+                style={[
+                  styles.CategoryListText,
+                  {
+                    backgroundColor:
+                      selectCategory === item ? '#2ecc72' : '#fff',
+                    color: selectCategory === item ? '#fff' : '#000',
+                    borderColor: selectCategory === item ? '#2ecc72' : '#000',
+                  },
+                ]}>
+                {item}
+              </Text>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+      <View>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={productList}
+          numColumns={3}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item}) => (
+            <TouchableOpacity style={[styles.ProductList]}>
+              <Text>{item.title}</Text>
+            </TouchableOpacity>
+          )}
         />
       </View>
     </View>
@@ -125,8 +128,8 @@ const styles = StyleSheet.create({
   },
   CategoryContainer: {
     flexGrow: 0,
-    paddingLeft:5,
-    marginTop:4
+    paddingLeft: 5,
+    marginTop: 4,
   },
   CategoryList: {
     marginHorizontal: 4,
@@ -138,14 +141,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     paddingVertical: 10,
     borderRadius: 8,
-    borderWidth:2
+    borderWidth: 2,
   },
-  ProductList:{
-    height:100,
-    width:100,
-    justifyContent:'center',
-    alignItems:'center',
-    backgroundColor:'red',
-    margin:10
-  }
+  ProductList: {
+    height: 100,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'red',
+    margin: 10,
+  },
 });
