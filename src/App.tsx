@@ -68,7 +68,7 @@ export const Hometabs = () => {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarIcon: ({focused, size, color}) => (
+          tabBarIcon: ({focused}) => (
             <CustomIcon
               name="person"
               size={32}
