@@ -8,13 +8,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import CustomIcon from '../component/CustomIcon';
 
 const DetailsScreen = ({route, navigation}: any) => {
-  const {title, description, rating, price, images, thumbnail}=route.params.item;
-  const[selectPic,setSelectedPic]=useState(thumbnail)
-  const[pic,setPic]=useState(thumbnail)
+  const {title, description, rating, price, images, thumbnail} =
+    route.params.item;
+  const [selectPic, setSelectedPic] = useState(thumbnail);
+  const [pic, setPic] = useState(thumbnail);
   return (
     <ScrollView>
       <View style={styles.Container}>
@@ -39,12 +40,17 @@ const DetailsScreen = ({route, navigation}: any) => {
             data={images}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => (
-              <TouchableOpacity style={[styles.imageList,{
-                borderColor:selectPic==item?"#F4C724":'#grey'
-              }]} onPress={()=>{
-                setPic(item)
-                setSelectedPic(item)
-              }}>
+              <TouchableOpacity
+                style={[
+                  styles.imageList,
+                  {
+                    borderColor: selectPic == item ? '#F4C724' : '#grey',
+                  },
+                ]}
+                onPress={() => {
+                  setPic(item);
+                  setSelectedPic(item);
+                }}>
                 <Image style={styles.image} source={{uri: item}} />
               </TouchableOpacity>
             )}
