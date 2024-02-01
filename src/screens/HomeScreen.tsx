@@ -30,8 +30,10 @@ const HomeScreen = ({navigation}: any) => {
   const TabHeight = useBottomTabBarHeight();
   const fetchData = async () => {
     const list = await AsyncStorage.getItem('cart');
+    console.log(list);
+    
     if (list) {
-      addToCart(list);
+      // addToCart(list);
     }
   };
 
