@@ -17,7 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {contextStore} from '../store/StoreContext';
 
 const HomeScreen = ({navigation}: any) => {
-  const {addToCart} = useContext(contextStore);
+  const {addInitialCartList} = useContext(contextStore);
   const [category, setCategory] = useState([
     'All',
     'Smartphones',
@@ -28,13 +28,11 @@ const HomeScreen = ({navigation}: any) => {
   ]);
   const [selectCategory, setSelectCategory] = useState('All');
   const TabHeight = useBottomTabBarHeight();
-  
+
   const fetchData = async () => {
-    const list = await AsyncStorage.getItem('cart');
-    console.log(list);
-    
+    const list = await AsyncStorage.getItem('cart');  
     if (list) {
-      // addToCart(list);
+      addInitialCartList(JSON.parse(list));
     }
   };
 

@@ -12,11 +12,11 @@ import {contextStore} from '../store/StoreContext';
 import HeaderBar from '../component/HeaderBar';
 import Separator from '../component/Separator';
 import CustomIcon from '../component/CustomIcon';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
-const CartScreen = () => {
+const CartScreen = ({navigation}: any) => {
   const {cartList} = useContext(contextStore);
-  console.log(cartList);
-
+  const TabHeight=useBottomTabBarHeight()
   return (
     <>
       <ScrollView style={styles.Container}>
@@ -50,6 +50,20 @@ const CartScreen = () => {
           )}
         />
       </ScrollView>
+      <View style={[styles.bottomContainer,{marginBottom:TabHeight}]}>
+        <TouchableOpacity
+          style={styles.buyBtn}
+          onPress={() => {
+            navigation.navigate('Payment');
+          }}>
+          <CustomIcon
+            name="keyboard-double-arrow-right"
+            size={24}
+            color="#fff"
+          />
+          <Text style={styles.BuyTxt}>Pay Now</Text>
+        </TouchableOpacity>
+      </View>
     </>
   );
 };
@@ -105,5 +119,45 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: '5%',
     top: '3%',
+  },
+  bottomContainer: {
+    height: 80,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
+  cartBtn: {
+    width: '50%',
+    borderWidth: 2,
+    marginRight: 8,
+    borderColor: '#2ecc72',
+    paddingVertical: 12,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  cartTxt: {
+    color: '#2ecc72',
+    fontSize: 17,
+    fontWeight: '500',
+  },
+  buyBtn: {
+    width: '50%',
+    borderWidth: 2,
+    paddingVertical: 12,
+    backgroundColor: '#2ecc72',
+    borderColor: '#2ecc72',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  BuyTxt: {
+    color: '#fff',
+    fontSize: 17,
+    fontWeight: '500',
   },
 });

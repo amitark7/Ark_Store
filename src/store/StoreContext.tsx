@@ -4,23 +4,29 @@ import {createContext, useState} from 'react';
 export const contextStore = createContext({
   cartList: [],
   addToCart: (arg0: any) => {},
+  addInitialCartList:(arg0:any)=>{},
 });
 const StoreProvider = ({children}: any) => {
   const [cartList, setcartList] = useState<any>([]);
 
-  const addToCart =async (item: any) => {
+  const addToCart =(item: any) => {
     if(cartList.length==0){
-      setcartList(item)
+      setcartList([...cartList,item])
     }else{
       setcartList([...cartList,item])
     }
-
   };
+
+  const addInitialCartList=(item:any)=>{
+    setcartList(item)
+  }
+
   return (
     <contextStore.Provider
       value={{
         cartList,
         addToCart,
+        addInitialCartList
       }}>
       {children}
     </contextStore.Provider>
