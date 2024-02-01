@@ -44,8 +44,8 @@ const CartScreen = ({navigation}: any) => {
   }, [cartList]);
   return (
     <>
-      <HeaderBar title="Cart" />
       <ScrollView style={styles.Container}>
+        <HeaderBar title="Cart" />
         {cartList.length === 0 ? (
           <View style={styles.EmptyContainer}>
             <Text style={styles.emptyTxt}>Cart is Empty</Text>
@@ -57,7 +57,11 @@ const CartScreen = ({navigation}: any) => {
             ItemSeparatorComponent={Separator}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}: any) => (
-              <TouchableOpacity style={styles.ListContainer}>
+              <TouchableOpacity
+                style={styles.ListContainer}
+                onPress={() => {
+                  navigation.push('Details', {item});
+                }}>
                 <View style={styles.imageContainer}>
                   <Image style={styles.image} source={{uri: item.thumbnail}} />
                 </View>
@@ -131,7 +135,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {},
   EmptyContainer: {
-    flex: 1,
+    marginTop: 200,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -145,7 +149,7 @@ const styles = StyleSheet.create({
     marginLeft: 16,
   },
   title: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: '700',
   },
   brand: {

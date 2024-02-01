@@ -20,14 +20,15 @@ const HomeScreen = ({navigation}: any) => {
   const {addInitialCartList} = useContext(contextStore);
   const [category, setCategory] = useState([
     'All',
-    'Smartphones',
+    'smartphones',
+    'laptops',
     'Headphones',
-    'Laptops',
     'Mens Wear',
     'Ladies Wear',
   ]);
   const [selectCategory, setSelectCategory] = useState('All');
   const TabHeight = useBottomTabBarHeight();
+  const[categoryList,setCategoryList]=useState<any>(productList)
 
   const fetchData = async () => {
     const list = await AsyncStorage.getItem('cart');  
@@ -35,6 +36,16 @@ const HomeScreen = ({navigation}: any) => {
       addInitialCartList(JSON.parse(list));
     }
   };
+
+  const CategoryList=(category:any)=>{
+    setSelectCategory(category)
+    if(category=='All'){
+      setCategoryList(productList)
+    }else{
+      let list=productList.filter((item)=>item.category==category)
+      setCategoryList(list)
+    }
+  } 
 
   useEffect(() => {
     fetchData();
@@ -67,7 +78,7 @@ const HomeScreen = ({navigation}: any) => {
             <TouchableOpacity
               style={[styles.CategoryList]}
               onPress={() => {
-                setSelectCategory(item);
+                CategoryList(item);
               }}>
               <Text
                 style={[
@@ -79,7 +90,7 @@ const HomeScreen = ({navigation}: any) => {
                     borderColor: selectCategory === item ? '#2ecc72' : '#000',
                   },
                 ]}>
-                {item}
+                {item.charAt(0).toUpperCase()+item.substring(1)}
               </Text>
             </TouchableOpacity>
           )}
@@ -92,7 +103,7 @@ const HomeScreen = ({navigation}: any) => {
             styles.ProductContainer,
             {marginBottom: TabHeight},
           ]}
-          data={productList}
+          data={categoryList}
           key={''}
           numColumns={2}
           scrollEnabled={false}
@@ -115,7 +126,18 @@ const HomeScreen = ({navigation}: any) => {
                 </Text>
                 <Text style={styles.ratingTxt}>⭐ {item.rating}</Text>
               </View>
-              <Text style={styles.priceTxt}>$ {item.price}</Text>
+              <View style={styles.PriceContainer}>
+                <Text style={styles.currentPrice}>
+                  $
+                  {Math.round(
+                    item.price - (item.price * Math.round(item.discountPercentage)) / 100,
+                  )}
+                </Text>
+                <Text style={styles.OrigionalPrice}>${item.price}</Text>
+                <Text style={styles.discounted}>
+                  ({Math.round(item.discountPercentage)}% off)
+                </Text>
+              </View>
             </TouchableOpacity>
           )}
         />
@@ -210,9 +232,24 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
   },
-  priceTxt: {
+  PriceContainer: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    marginTop: 2,
+  },
+  currentPrice: {
     fontSize: 20,
-    fontWeight: 'bold',
     color: '#000',
+    fontWeight: 'bold',
+    marginRight: 6,
+  },
+  OrigionalPrice: {
+    fontSize: 14,
+    textDecorationLine: 'line-through',
+    marginRight: 6,
+  },
+  discounted: {
+    fontSize: 12,
+    color: '#2ecc72',
   },
 });
