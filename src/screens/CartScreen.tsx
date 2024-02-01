@@ -4,11 +4,11 @@ import { contextStore } from '../store/StoreContext'
 
 const CartScreen = () => {
   const {cartList}=useContext(contextStore)
-  console.log(cartList);
+  console.log(cartList[0].title);
   
   return (
     <View>
-      <Text>CartScreen</Text>
+      <Text>Cart</Text>
     </View>
   )
 }

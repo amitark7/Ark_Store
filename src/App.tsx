@@ -10,6 +10,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import CustomIcon from './component/CustomIcon';
 import PaymentScreen from './screens/PaymentScreen';
+import StoreProvider from './store/StoreContext';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -20,11 +21,11 @@ export const Hometabs = () => {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle:{
-          height:80,
-          position:'absolute',
+        tabBarStyle: {
+          height: 80,
+          position: 'absolute',
         },
-        tabBarHideOnKeyboard:true
+        tabBarHideOnKeyboard: true,
       }}>
       <Tab.Screen
         name="Home"
@@ -83,17 +84,16 @@ export const Hometabs = () => {
 };
 const App = () => {
   return (
-    <NavigationContainer>
-      <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'}/>
-      <Stack.Navigator screenOptions={{headerShown:false}}>
-        <Stack.Screen
-          name="Hometabs"
-          component={Hometabs}
-        />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-        <Stack.Screen name="Payment" component={PaymentScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <StoreProvider>
+      <NavigationContainer>
+        <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Hometabs" component={Hometabs} />
+          <Stack.Screen name="Details" component={DetailsScreen} />
+          <Stack.Screen name="Payment" component={PaymentScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </StoreProvider>
   );
 };
 
