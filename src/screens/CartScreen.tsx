@@ -21,11 +21,10 @@ const CartScreen = ({navigation}: any) => {
 
   const calculateCartPrice=()=>{
     for(let i=0; i<cartList.length; i++){
-      CartPrice+=cartList[i].price - (cartList[i].price * Math.round(cartList[i].discountPercentage)) / 100,
+      CartPrice+=Math.round(cartList[i].price - (cartList[i].price * Math.round(cartList[i].discountPercentage)) / 100);
     }
-    console.log(CartPrice);
-    
   }
+
   useEffect(()=>{
     calculateCartPrice()
   },[cartList])
@@ -63,6 +62,7 @@ const CartScreen = ({navigation}: any) => {
         />
       </ScrollView>
       <View style={[styles.bottomContainer,{marginBottom:TabHeight}]}>
+        <Text>${CartPrice}</Text>
         <TouchableOpacity
           style={styles.buyBtn}
           onPress={() => {
