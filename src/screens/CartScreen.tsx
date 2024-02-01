@@ -35,7 +35,7 @@ const CartScreen = () => {
                 <Text style={styles.price}>${Math.round(
                     item.price - (item.price * Math.round(item.discountPercentage)) / 100,
                   )}</Text>
-                  <Text>{item.stock} Items left</Text>
+                  <Text style={styles.stock}>{item.stock} Items left</Text>
               </View>
             </TouchableOpacity>
           )}
@@ -81,4 +81,11 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     marginTop:8
   },
+  stock:{
+    color:'#2ecc72',
+    paddingVertical:4,
+    paddingHorizontal:8,
+    borderWidth:1,
+    alignSelf:'center'
+  }
 });
