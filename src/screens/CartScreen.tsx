@@ -24,8 +24,9 @@ const CartScreen = ({navigation}: any) => {
     let CartPrice = 0;
     for (let i = 0; i < cartList.length; i++) {
       CartPrice += Math.round(
-        cartList[i]['price']-
-          (cartList[i]['price'] * Math.round(cartList[i]['discountPercentage'])) /
+        cartList[i]['price'] -
+          (cartList[i]['price'] *
+            Math.round(cartList[i]['discountPercentage'])) /
             100,
       );
     }
@@ -45,45 +46,47 @@ const CartScreen = ({navigation}: any) => {
     <>
       <ScrollView style={styles.Container}>
         <HeaderBar title="Cart" />
-        {
-          cartList.length===0?(
-            <View>
-              <Text style={styles.emptyTxt}>Cart is Empty</Text>
-            </View>
-          )
-        }
-        <FlatList
-          data={cartList}
-          scrollEnabled={false}
-          ItemSeparatorComponent={Separator}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({item}: any) => (
-            <TouchableOpacity style={styles.ListContainer}>
-              <View style={styles.imageContainer}>
-                <Image style={styles.image} source={{uri: item.thumbnail}} />
-              </View>
-              <View style={styles.innerContainer}>
-                <Text style={styles.title}>{item.title?.substring(0, 11)}</Text>
-                <Text style={styles.brand}>{item.brand}</Text>
-                <Text style={styles.price}>
-                  $
-                  {Math.round(
-                    item.price -
-                      (item.price * Math.round(item.discountPercentage)) / 100,
-                  )}
-                </Text>
-                <Text style={styles.stock}>{item.stock} Items left</Text>
-              </View>
-              <TouchableOpacity
-                style={styles.close}
-                onPress={() => {
-                  deleteFromCart(item.id);
-                }}>
-                <CustomIcon name="close" size={24} color="#000" />
+        {cartList.length === 0 ? (
+          <View>
+            <Text style={styles.emptyTxt}>Cart is Empty</Text>
+          </View>
+        ) : (
+          <FlatList
+            data={cartList}
+            scrollEnabled={false}
+            ItemSeparatorComponent={Separator}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}: any) => (
+              <TouchableOpacity style={styles.ListContainer}>
+                <View style={styles.imageContainer}>
+                  <Image style={styles.image} source={{uri: item.thumbnail}} />
+                </View>
+                <View style={styles.innerContainer}>
+                  <Text style={styles.title}>
+                    {item.title?.substring(0, 11)}
+                  </Text>
+                  <Text style={styles.brand}>{item.brand}</Text>
+                  <Text style={styles.price}>
+                    $
+                    {Math.round(
+                      item.price -
+                        (item.price * Math.round(item.discountPercentage)) /
+                          100,
+                    )}
+                  </Text>
+                  <Text style={styles.stock}>{item.stock} Items left</Text>
+                </View>
+                <TouchableOpacity
+                  style={styles.close}
+                  onPress={() => {
+                    deleteFromCart(item.id);
+                  }}>
+                  <CustomIcon name="close" size={24} color="#000" />
+                </TouchableOpacity>
               </TouchableOpacity>
-            </TouchableOpacity>
-          )}
-        />
+            )}
+          />
+        )}
       </ScrollView>
       <View style={[styles.bottomContainer, {marginBottom: TabHeight}]}>
         <Text style={styles.cartPrice}>${cartPrice}</Text>
@@ -117,10 +120,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginVertical: 10,
   },
-  emptyTxt:{
-    fontSize:26,
-    fontWeight:'bold',
-    color:'#000'
+  emptyTxt: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#000',
   },
   imageContainer: {},
   image: {
