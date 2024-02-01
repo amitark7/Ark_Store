@@ -15,6 +15,7 @@ import CustomIcon from '../component/CustomIcon';
 
 const CartScreen = () => {
   const {cartList} = useContext(contextStore);
+  console.log(cartList);
 
   return (
     <>
@@ -31,7 +32,7 @@ const CartScreen = () => {
                 <Image style={styles.image} source={{uri: item.thumbnail}} />
               </View>
               <View style={styles.innerContainer}>
-                <Text style={styles.title}>{item.title.substring(0, 11)}</Text>
+                <Text style={styles.title}>{item.title?.substring(0, 11)}</Text>
                 <Text style={styles.brand}>{item.brand}</Text>
                 <Text style={styles.price}>
                   $
@@ -42,8 +43,8 @@ const CartScreen = () => {
                 </Text>
                 <Text style={styles.stock}>{item.stock} Items left</Text>
               </View>
-              <TouchableOpacity>
-                <CustomIcon name='cross' size={24} color='#000'/>
+              <TouchableOpacity style={styles.close}>
+                <CustomIcon name="close" size={24} color="#000" />
               </TouchableOpacity>
             </TouchableOpacity>
           )}
@@ -66,14 +67,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginVertical: 10,
   },
-  imageContainer: {
-    
-  },
+  imageContainer: {},
   image: {
     width: 140,
     height: 140,
     borderRadius: 8,
-    objectFit:'fill'
+    objectFit: 'fill',
   },
   innerContainer: {
     marginLeft: 16,
@@ -98,8 +97,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     borderWidth: 1,
     alignSelf: 'center',
-    borderRadius:8,
-    borderColor:'#2ecc72',
-    marginTop:8
+    borderRadius: 8,
+    borderColor: '#2ecc72',
+    marginTop: 8,
+  },
+  close: {
+    position: 'absolute',
+    right: '5%',
+    top: '3%',
   },
 });

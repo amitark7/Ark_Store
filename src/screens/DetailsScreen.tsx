@@ -11,9 +11,10 @@ import {
 import React, {useContext, useState} from 'react';
 import CustomIcon from '../component/CustomIcon';
 import { contextStore } from '../store/StoreContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DetailsScreen = ({route, navigation}: any) => {
-  const {addToCart}=useContext(contextStore)
+  const {addToCart,cartList}=useContext(contextStore)
   const {
     title,
     description,
@@ -25,6 +26,12 @@ const DetailsScreen = ({route, navigation}: any) => {
 
   const [selectPic, setSelectedPic] = useState(images[0]);
   const [pic, setPic] = useState(images[0]);
+
+  const handleCart=async (item:any)=>{
+    addToCart(item)
+    const newCart=[...cartList,item]
+    await AsyncStorage.setItem('cart',JSON.stringify(newCart))
+  }
   return (
     <>
       <ScrollView>
@@ -89,7 +96,7 @@ const DetailsScreen = ({route, navigation}: any) => {
       </ScrollView>
       <View style={styles.bottomContainer}>
         <TouchableOpacity style={styles.cartBtn} onPress={()=>{
-          addToCart(route.params.item)
+          handleCart(route.params.item)
           navigation.navigate('Cart');
         }}>
           <CustomIcon name="shopping-cart" size={24} color="#2ecc72" />

@@ -8,13 +8,16 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import HeaderBar from '../component/HeaderBar';
 import CustomIcon from '../component/CustomIcon';
 import {productList} from '../assets/data';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {contextStore} from '../store/StoreContext';
 
-const HomeScreen = ({navigation}:any) => {
+const HomeScreen = ({navigation}: any) => {
+  const {addToCart} = useContext(contextStore);
   const [category, setCategory] = useState([
     'All',
     'Smartphones',
@@ -25,6 +28,16 @@ const HomeScreen = ({navigation}:any) => {
   ]);
   const [selectCategory, setSelectCategory] = useState('All');
   const TabHeight = useBottomTabBarHeight();
+  const fetchData = async () => {
+    const list = await AsyncStorage.getItem('cart');
+    if (list) {
+      addToCart(list);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <ScrollView style={styles.container}>
       <HeaderBar title="" />
@@ -74,21 +87,31 @@ const HomeScreen = ({navigation}:any) => {
       <View>
         <FlatList
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={[styles.ProductContainer,{marginBottom:TabHeight}]}
+          contentContainerStyle={[
+            styles.ProductContainer,
+            {marginBottom: TabHeight},
+          ]}
           data={productList}
           key={''}
           numColumns={2}
           scrollEnabled={false}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item}) => (
-            <TouchableOpacity style={styles.ProductList} onPress={()=>{
-              navigation.push('Details',{
-                item
-              })
-            }}>
-              <Image style={styles.productImage} source={{uri:item.thumbnail}}/>
+            <TouchableOpacity
+              style={styles.ProductList}
+              onPress={() => {
+                navigation.push('Details', {
+                  item,
+                });
+              }}>
+              <Image
+                style={styles.productImage}
+                source={{uri: item.thumbnail}}
+              />
               <View style={styles.productInnerContainer}>
-                <Text style={styles.productTitle}>{item.title.substring(0,11)}</Text>
+                <Text style={styles.productTitle}>
+                  {item.title.substring(0, 11)}
+                </Text>
                 <Text style={styles.ratingTxt}>⭐ {item.rating}</Text>
               </View>
               <Text style={styles.priceTxt}>$ {item.price}</Text>
@@ -157,38 +180,38 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 2,
   },
-  ProductContainer:{
-    flexGrow:1,
+  ProductContainer: {
+    flexGrow: 1,
   },
   ProductList: {
-    width:'48%',
+    width: '48%',
     marginVertical: 8,
-    marginHorizontal:4
+    marginHorizontal: 4,
   },
-  productImage:{
-    width:'100%',
-    height:150,
-    borderRadius:10,
-    objectFit:'fill',
+  productImage: {
+    width: '100%',
+    height: 150,
+    borderRadius: 10,
+    objectFit: 'fill',
   },
-  productInnerContainer:{
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'center',
-    width:'100%',
-    marginVertical:6
+  productInnerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    marginVertical: 6,
   },
-  productTitle:{
-    fontSize:16,
-    fontWeight:'400'
+  productTitle: {
+    fontSize: 16,
+    fontWeight: '400',
   },
-  ratingTxt:{
-    color:'#000',
-    fontWeight:'bold'
+  ratingTxt: {
+    color: '#000',
+    fontWeight: 'bold',
   },
-  priceTxt:{
-    fontSize:20,
-    fontWeight:'bold',
-    color:'#000'
-  }
+  priceTxt: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#000',
+  },
 });
