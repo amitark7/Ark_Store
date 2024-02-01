@@ -45,6 +45,13 @@ const CartScreen = ({navigation}: any) => {
     <>
       <ScrollView style={styles.Container}>
         <HeaderBar title="Cart" />
+        {
+          cartList.length===0?(
+            <View>
+              <Text style={styles.emptyTxt}>Cart is Empty</Text>
+            </View>
+          )
+        }
         <FlatList
           data={cartList}
           scrollEnabled={false}
@@ -109,6 +116,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 20,
     marginVertical: 10,
+  },
+  emptyTxt:{
+    fontSize:26,
+    fontWeight:'bold',
+    color:'#000'
   },
   imageContainer: {},
   image: {
