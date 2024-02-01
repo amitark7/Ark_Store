@@ -13,9 +13,10 @@ import HeaderBar from '../component/HeaderBar';
 import Separator from '../component/Separator';
 import CustomIcon from '../component/CustomIcon';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CartScreen = ({navigation}: any) => {
-  const {cartList, deleteFromCart} = useContext(contextStore);
+  const {cartList, addInitialCartList} = useContext(contextStore);
   const TabHeight = useBottomTabBarHeight();
   const [cartPrice, setCartPrice] = useState(0);
 
@@ -31,6 +32,12 @@ const CartScreen = ({navigation}: any) => {
     setCartPrice(CartPrice);
   };
 
+  const deleteFromCart = async (id: any) => {
+    let newCart = cartList.filter((item: {id: number}) => item.id !== id);
+    await AsyncStorage.setItem('cart', JSON.stringify(newCart)).then(() =>
+      addInitialCartList(newCart),
+    );
+  };
   useEffect(() => {
     calculateCartPrice();
   }, [cartList]);
