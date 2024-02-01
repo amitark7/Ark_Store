@@ -24,8 +24,8 @@ const CartScreen = ({navigation}: any) => {
     let CartPrice = 0;
     for (let i = 0; i < cartList.length; i++) {
       CartPrice += Math.round(
-        cartList[i].price -
-          (cartList[i].price * Math.round(cartList[i].discountPercentage)) /
+        cartList[i]['price']-
+          (cartList[i]['price'] * Math.round(cartList[i]['discountPercentage'])) /
             100,
       );
     }
