@@ -5,7 +5,6 @@ export const contextStore = createContext({
   cartList: [],
   addToCart: (arg0: any) => {},
   addInitialCartList: (arg0: any) => {},
-  deleteFromCart: (arg0: any) => {},
 });
 const StoreProvider = ({children}: any) => {
   const [cartList, setcartList] = useState<any>([]);
@@ -16,10 +15,6 @@ const StoreProvider = ({children}: any) => {
     } else {
       setcartList([...cartList, item]);
     }
-  };
-  const deleteFromCart = async (id: any) => {
-    setcartList(cartList.filter((item: {id: number}) => item.id !== id));
-    await AsyncStorage.setItem('cart', JSON.stringify(cartList));
   };
 
   const addInitialCartList = (item: any) => {
@@ -32,7 +27,6 @@ const StoreProvider = ({children}: any) => {
         cartList,
         addToCart,
         addInitialCartList,
-        deleteFromCart,
       }}>
       {children}
     </contextStore.Provider>
