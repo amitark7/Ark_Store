@@ -10,6 +10,7 @@ import {
 import React, {useContext} from 'react';
 import {contextStore} from '../store/StoreContext';
 import HeaderBar from '../component/HeaderBar';
+import Separator from '../component/Separator';
 
 const CartScreen = () => {
   const {cartList} = useContext(contextStore);
@@ -21,6 +22,7 @@ const CartScreen = () => {
         <FlatList
           data={cartList}
           scrollEnabled={false}
+          ItemSeparatorComponent={Separator}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item}:any) => (
             <TouchableOpacity style={styles.ListContainer}>
