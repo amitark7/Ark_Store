@@ -15,12 +15,12 @@ import CustomIcon from '../component/CustomIcon';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 const CartScreen = ({navigation}: any) => {
-  const {cartList,deleteFromCart} = useContext(contextStore);
+  const {cartList, deleteFromCart} = useContext(contextStore);
   const TabHeight = useBottomTabBarHeight();
   const [cartPrice, setCartPrice] = useState(0);
 
   const calculateCartPrice = () => {
-    let CartPrice=0
+    let CartPrice = 0;
     for (let i = 0; i < cartList.length; i++) {
       CartPrice += Math.round(
         cartList[i].price -
@@ -28,7 +28,7 @@ const CartScreen = ({navigation}: any) => {
             100,
       );
     }
-    setCartPrice(CartPrice)
+    setCartPrice(CartPrice);
   };
 
   useEffect(() => {
@@ -60,9 +60,11 @@ const CartScreen = ({navigation}: any) => {
                 </Text>
                 <Text style={styles.stock}>{item.stock} Items left</Text>
               </View>
-              <TouchableOpacity style={styles.close} onPress={()=>{
-                deleteFromCart(item.id)
-              }}>
+              <TouchableOpacity
+                style={styles.close}
+                onPress={() => {
+                  deleteFromCart(item.id);
+                }}>
                 <CustomIcon name="close" size={24} color="#000" />
               </TouchableOpacity>
             </TouchableOpacity>
