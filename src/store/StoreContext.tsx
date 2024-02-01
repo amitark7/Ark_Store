@@ -6,7 +6,7 @@ export const contextStore = createContext({
 });
 
 const StoreProvider = ({children}: any) => {
-  const [cartList, setcartList] = useState<any>(['']);
+  const [cartList, setcartList] = useState<any>([]);
 
   const addToCart = (item: any) => {
     if(cartList.length==0){

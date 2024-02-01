@@ -22,7 +22,7 @@ const CartScreen = () => {
           data={cartList}
           scrollEnabled={false}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({item}) => (
+          renderItem={({item}:any) => (
             <TouchableOpacity style={styles.ListContainer}>
               <View style={styles.imageContainer}>
                 <Image style={styles.image} source={{uri:item.thumbnail}}/>
