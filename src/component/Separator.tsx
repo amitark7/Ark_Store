@@ -3,12 +3,16 @@ import React from 'react'
 
 const Separator = () => {
   return (
-    <View>
-      <Text>Separator</Text>
+    <View style={styles.container}>
     </View>
   )
 }
 
 export default Separator
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container:{
+    height:3,
+    backgroundColor:'#DAE0E2s'
+  }
+})
