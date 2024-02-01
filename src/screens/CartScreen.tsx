@@ -44,10 +44,10 @@ const CartScreen = ({navigation}: any) => {
   }, [cartList]);
   return (
     <>
+      <HeaderBar title="Cart" />
       <ScrollView style={styles.Container}>
-        <HeaderBar title="Cart" />
         {cartList.length === 0 ? (
-          <View>
+          <View style={styles.EmptyContainer}>
             <Text style={styles.emptyTxt}>Cart is Empty</Text>
           </View>
         ) : (
@@ -89,9 +89,7 @@ const CartScreen = ({navigation}: any) => {
         )}
       </ScrollView>
       {cartList.length === 0 ? (
-        <View>
-          <Text style={styles.emptyTxt}>Cart is Empty</Text>
-        </View>
+        ''
       ) : (
         <View style={[styles.bottomContainer, {marginBottom: TabHeight}]}>
           <Text style={styles.cartPrice}>${cartPrice}</Text>
@@ -132,6 +130,11 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   imageContainer: {},
+  EmptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   image: {
     width: 140,
     height: 140,
