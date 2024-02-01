@@ -15,16 +15,9 @@ import CustomIcon from '../component/CustomIcon';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 const CartScreen = ({navigation}: any) => {
-  const {cartList} = useContext(contextStore);
+  const {cartList,deleteFromCart} = useContext(contextStore);
   const TabHeight = useBottomTabBarHeight();
   const [cartPrice, setCartPrice] = useState(0);
-
-  const deleteFromCart=(Pid:any)=>{
-    let newCart;
-    newCart=cartList.filter(({id}):any=>id!==Pid);
-    console.log(newCart);
- 
-  }
 
   const calculateCartPrice = () => {
     let CartPrice=0
