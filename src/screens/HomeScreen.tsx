@@ -28,6 +28,7 @@ const HomeScreen = ({navigation}: any) => {
   ]);
   const [selectCategory, setSelectCategory] = useState('All');
   const TabHeight = useBottomTabBarHeight();
+  
   const fetchData = async () => {
     const list = await AsyncStorage.getItem('cart');
     console.log(list);
