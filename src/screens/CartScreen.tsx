@@ -30,11 +30,12 @@ const CartScreen = () => {
                 <Image style={styles.image} source={{uri:item.thumbnail}}/>
               </View>
               <View style={styles.innerContainer}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.brand}>Apple</Text>
+                <Text style={styles.title}>{item.title.substring(0,11)}</Text>
+                <Text style={styles.brand}>{item.brand}</Text>
                 <Text style={styles.price}>${Math.round(
                     item.price - (item.price * Math.round(item.discountPercentage)) / 100,
                   )}</Text>
+                  <Text>{item.stock} Items left</Text>
               </View>
             </TouchableOpacity>
           )}
@@ -49,12 +50,13 @@ export default CartScreen;
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    backgroundColor:'#fff'
+    backgroundColor:'#fff',
+    paddingHorizontal:10
   },
   ListContainer: {
     flexDirection:'row',
-    paddingHorizontal:30,
-    marginBottom:10
+    paddingHorizontal:20,
+    marginVertical:10
   },
   imageContainer: {},
   image: {

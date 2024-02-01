@@ -12,7 +12,8 @@ export default Separator
 
 const styles = StyleSheet.create({
   container:{
-    height:1,
-    backgroundColor:'#DAE0E2'
+    height:2,
+    backgroundColor:'#DAE0E2',
+    marginHorizontal:20
   }
 })
