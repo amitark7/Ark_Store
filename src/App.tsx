@@ -9,6 +9,7 @@ import FavoriteScreen from './screens/FavoriteScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import CustomIcon from './component/CustomIcon';
+import PaymentScreen from './screens/PaymentScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -90,6 +91,7 @@ const App = () => {
           component={Hometabs}
         />
         <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Payment" component={PaymentScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

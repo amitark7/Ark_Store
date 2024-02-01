@@ -6,9 +6,15 @@ export const contextStore = createContext({
 });
 
 const StoreProvider = ({children}: any) => {
-  const [cartList, setcartList] = useState([]);
+  const [cartList, setcartList] = useState<any>();
 
-  const addToCart = (value: any) => {};
+  const addToCart = (item: any) => {
+    if(cartList.length==0){
+      setcartList(item)
+    }else{
+      setcartList([...cartList,item])
+    }
+  };
   return (
     <contextStore.Provider
       value={{
@@ -19,3 +25,5 @@ const StoreProvider = ({children}: any) => {
     </contextStore.Provider>
   );
 };
+
+export default StoreProvider;

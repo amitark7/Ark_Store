@@ -8,20 +8,20 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import CustomIcon from '../component/CustomIcon';
+import { contextStore } from '../store/StoreContext';
 
 const DetailsScreen = ({route, navigation}: any) => {
+  const {addToCart}=useContext(contextStore)
   const {
     title,
     description,
     rating,
     price,
     images,
-    thumbnail,
     discountPercentage,
   } = route.params.item;
-  console.log(route.params.item);
 
   const [selectPic, setSelectedPic] = useState(images[0]);
   const [pic, setPic] = useState(images[0]);
@@ -88,11 +88,16 @@ const DetailsScreen = ({route, navigation}: any) => {
         </View>
       </ScrollView>
       <View style={styles.bottomContainer}>
-        <TouchableOpacity style={styles.cartBtn}>
+        <TouchableOpacity style={styles.cartBtn} onPress={()=>{
+          addToCart(route.params.item)
+          navigation.navigate('Cart');
+        }}>
           <CustomIcon name="shopping-cart" size={24} color="#2ecc72" />
           <Text style={styles.cartTxt}>Add to cart</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buyBtn}>
+        <TouchableOpacity style={styles.buyBtn} onPress={()=>{
+          navigation.navigate('Payment')
+        }}>
           <CustomIcon
             name="keyboard-double-arrow-right"
             size={24}
@@ -133,7 +138,7 @@ const styles = StyleSheet.create({
   },
   imageBg: {
     width: '100%',
-    height: 300,
+    height: 400,
     objectFit: 'fill',
     borderRadius: 10,
   },
