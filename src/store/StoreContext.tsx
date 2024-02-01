@@ -5,6 +5,7 @@ export const contextStore = createContext({
   cartList: [],
   addToCart: (arg0: any) => {},
   addInitialCartList:(arg0:any)=>{},
+  deleteFromCart:(arg0:any)=>{}
 });
 const StoreProvider = ({children}: any) => {
   const [cartList, setcartList] = useState<any>([]);
@@ -16,6 +17,10 @@ const StoreProvider = ({children}: any) => {
       setcartList([...cartList,item])
     }
   };
+  const deleteFromCart=(id:any)=>{
+    setcartList(cartList.filter((item: { id: number; })=>item.id!==1))
+    console.log(cartList);
+  }
 
   const addInitialCartList=(item:any)=>{
     setcartList(item)
@@ -26,7 +31,8 @@ const StoreProvider = ({children}: any) => {
       value={{
         cartList,
         addToCart,
-        addInitialCartList
+        addInitialCartList,
+        deleteFromCart
       }}>
       {children}
     </contextStore.Provider>

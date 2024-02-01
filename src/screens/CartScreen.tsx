@@ -7,27 +7,40 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {contextStore} from '../store/StoreContext';
 import HeaderBar from '../component/HeaderBar';
 import Separator from '../component/Separator';
 import CustomIcon from '../component/CustomIcon';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 const CartScreen = ({navigation}: any) => {
   const {cartList} = useContext(contextStore);
-  const TabHeight=useBottomTabBarHeight()
-  let CartPrice=0;
+  const TabHeight = useBottomTabBarHeight();
+  const [cartPrice, setCartPrice] = useState(0);
 
-  const calculateCartPrice=()=>{
-    for(let i=0; i<cartList.length; i++){
-      CartPrice+=Math.round(cartList[i].price - (cartList[i].price * Math.round(cartList[i].discountPercentage)) / 100);
-    }
+  const deleteFromCart=(Pid:any)=>{
+    let newCart;
+    newCart=cartList.filter(({id}):any=>id!==Pid);
+    console.log(newCart);
+ 
   }
 
-  useEffect(()=>{
-    calculateCartPrice()
-  },[cartList])
+  const calculateCartPrice = () => {
+    let CartPrice=0
+    for (let i = 0; i < cartList.length; i++) {
+      CartPrice += Math.round(
+        cartList[i].price -
+          (cartList[i].price * Math.round(cartList[i].discountPercentage)) /
+            100,
+      );
+    }
+    setCartPrice(CartPrice)
+  };
+
+  useEffect(() => {
+    calculateCartPrice();
+  }, [cartList]);
   return (
     <>
       <ScrollView style={styles.Container}>
@@ -54,15 +67,17 @@ const CartScreen = ({navigation}: any) => {
                 </Text>
                 <Text style={styles.stock}>{item.stock} Items left</Text>
               </View>
-              <TouchableOpacity style={styles.close}>
+              <TouchableOpacity style={styles.close} onPress={()=>{
+                deleteFromCart(item.id)
+              }}>
                 <CustomIcon name="close" size={24} color="#000" />
               </TouchableOpacity>
             </TouchableOpacity>
           )}
         />
       </ScrollView>
-      <View style={[styles.bottomContainer,{marginBottom:TabHeight}]}>
-        <Text>${CartPrice}</Text>
+      <View style={[styles.bottomContainer, {marginBottom: TabHeight}]}>
+        <Text style={styles.cartPrice}>${cartPrice}</Text>
         <TouchableOpacity
           style={styles.buyBtn}
           onPress={() => {
@@ -85,7 +100,7 @@ export default CartScreen;
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     paddingHorizontal: 10,
   },
   ListContainer: {
@@ -140,22 +155,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
   },
-  cartBtn: {
-    width: '50%',
-    borderWidth: 2,
-    marginRight: 8,
-    borderColor: '#2ecc72',
-    paddingVertical: 12,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 8,
-  },
-  cartTxt: {
-    color: '#2ecc72',
-    fontSize: 17,
-    fontWeight: '500',
-  },
   buyBtn: {
     width: '50%',
     borderWidth: 2,
@@ -171,5 +170,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 17,
     fontWeight: '500',
+  },
+  cartPrice: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#000',
   },
 });
