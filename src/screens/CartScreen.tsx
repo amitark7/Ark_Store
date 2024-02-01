@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {contextStore} from '../store/StoreContext';
 import HeaderBar from '../component/HeaderBar';
 import Separator from '../component/Separator';
@@ -17,6 +17,18 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 const CartScreen = ({navigation}: any) => {
   const {cartList} = useContext(contextStore);
   const TabHeight=useBottomTabBarHeight()
+  let CartPrice=0;
+
+  const calculateCartPrice=()=>{
+    for(let i=0; i<cartList.length; i++){
+      CartPrice+=cartList[i].price - (cartList[i].price * Math.round(cartList[i].discountPercentage)) / 100,
+    }
+    console.log(CartPrice);
+    
+  }
+  useEffect(()=>{
+    calculateCartPrice()
+  },[cartList])
   return (
     <>
       <ScrollView style={styles.Container}>
