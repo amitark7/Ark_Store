@@ -12,58 +12,96 @@ import React, {useState} from 'react';
 import CustomIcon from '../component/CustomIcon';
 
 const DetailsScreen = ({route, navigation}: any) => {
-  const {title, description, rating, price, images, thumbnail} =
-    route.params.item;
-  const [selectPic, setSelectedPic] = useState(thumbnail);
-  const [pic, setPic] = useState(thumbnail);
+  const {
+    title,
+    description,
+    rating,
+    price,
+    images,
+    thumbnail,
+    discountPercentage,
+  } = route.params.item;
+  console.log(route.params.item);
+
+  const [selectPic, setSelectedPic] = useState(images[0]);
+  const [pic, setPic] = useState(images[0]);
   return (
-    <ScrollView>
-      <View style={styles.Container}>
-        <View style={styles.imageContainer}>
-          <Image style={styles.imageBg} source={{uri: pic}} />
-          <View style={styles.iconContainer}>
-            <TouchableOpacity
-              style={styles.icon}
-              onPress={() => {
-                navigation.pop();
-              }}>
-              <CustomIcon name="arrow-back" size={24} color="#000" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.icon}>
-              <CustomIcon name="favorite" size={24} color="#000" />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View>
-          <FlatList
-            horizontal
-            data={images}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({item}) => (
+    <>
+      <ScrollView>
+        <View style={styles.Container}>
+          <View style={styles.imageContainer}>
+            <Image style={styles.imageBg} source={{uri: pic}} />
+            <View style={styles.iconContainer}>
               <TouchableOpacity
-                style={[
-                  styles.imageList,
-                  {
-                    borderColor: selectPic == item ? '#2ecc72' : '#DAE0E2',
-                  },
-                ]}
+                style={styles.icon}
                 onPress={() => {
-                  setPic(item);
-                  setSelectedPic(item);
+                  navigation.pop();
                 }}>
-                <Image style={styles.image} source={{uri: item}} />
+                <CustomIcon name="arrow-back" size={24} color="#000" />
               </TouchableOpacity>
-            )}
-          />
-        </View>
-        <View style={styles.textContainer}>
-          <View style={styles.topContainer}>
+              <TouchableOpacity style={styles.icon}>
+                <CustomIcon name="favorite" size={24} color="#000" />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View>
+            <FlatList
+              horizontal
+              data={images}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({item}) => (
+                <TouchableOpacity
+                  style={[
+                    styles.imageList,
+                    {
+                      borderColor: selectPic == item ? '#2ecc72' : '#DAE0E2',
+                    },
+                  ]}
+                  onPress={() => {
+                    setPic(item);
+                    setSelectedPic(item);
+                  }}>
+                  <Image style={styles.image} source={{uri: item}} />
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+          <View style={styles.textContainer}>
             <Text style={styles.titleTxt}>{title}</Text>
-            <Text style={styles.ratingTxt}>⭐ {rating}</Text>
+            <View style={styles.topContainer}>
+              <View style={styles.PriceContainer}>
+                <Text style={styles.currentPrice}>
+                  $
+                  {Math.round(
+                    price - (price * Math.round(discountPercentage)) / 100,
+                  )}
+                </Text>
+                <Text style={styles.OrigionalPrice}>${price}</Text>
+                <Text style={styles.discounted}>
+                  ({Math.round(discountPercentage)}% off)
+                </Text>
+              </View>
+              <Text style={styles.ratingTxt}>⭐ {rating}</Text>
+            </View>
+            <Text style={styles.descriptionTxt}>{description}</Text>
           </View>
         </View>
+      </ScrollView>
+      <View style={styles.bottomContainer}>
+        <TouchableOpacity style={styles.cartBtn}>
+          <CustomIcon name="shopping-cart" size={24} color="#2ecc72" />
+          <Text style={styles.cartTxt}>Add to cart</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buyBtn}>
+          <CustomIcon
+            name="keyboard-double-arrow-right"
+            size={24}
+            color="#fff"
+          />
+          <Text style={styles.BuyTxt}>Buy Now</Text>
+        </TouchableOpacity>
       </View>
-    </ScrollView>
+    </>
   );
 };
 
@@ -114,19 +152,83 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     marginTop: 12,
   },
-  topContainer:{
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'center'
+  topContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   titleTxt: {
     fontSize: 24,
     color: '#000',
     fontWeight: 'bold',
   },
-  ratingTxt:{
-    color:'#000',
-    fontWeight:'bold',
-    fontSize:20
-  }
+  ratingTxt: {
+    color: '#000',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  PriceContainer: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    marginTop: 8,
+  },
+  currentPrice: {
+    fontSize: 22,
+    color: '#000',
+    fontWeight: 'bold',
+    marginRight: 6,
+  },
+  OrigionalPrice: {
+    fontSize: 14,
+    textDecorationLine: 'line-through',
+    marginRight: 6,
+  },
+  discounted: {
+    fontSize: 12,
+    color: '#2ecc72',
+  },
+  descriptionTxt: {
+    fontWeight: '500',
+    marginTop: 8,
+  },
+  bottomContainer: {
+    height: 80,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
+  cartBtn: {
+    width: '50%',
+    borderWidth: 2,
+    marginRight: 8,
+    borderColor: '#2ecc72',
+    paddingVertical: 12,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  cartTxt: {
+    color: '#2ecc72',
+    fontSize: 17,
+    fontWeight: '500',
+  },
+  buyBtn: {
+    width: '50%',
+    borderWidth: 2,
+    paddingVertical: 12,
+    backgroundColor: '#2ecc72',
+    borderColor: '#2ecc72',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  BuyTxt: {
+    color: '#fff',
+    fontSize: 17,
+    fontWeight: '500',
+  },
 });
