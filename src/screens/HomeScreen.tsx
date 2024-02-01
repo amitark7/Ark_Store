@@ -22,9 +22,10 @@ const HomeScreen = ({navigation}: any) => {
     'All',
     'smartphones',
     'laptops',
-    'Headphones',
-    'Mens Wear',
-    'Ladies Wear',
+    'fragrances',
+    'skincare',
+    'groceries',
+    'home-decoration'
   ]);
   const [selectCategory, setSelectCategory] = useState('All');
   const TabHeight = useBottomTabBarHeight();
