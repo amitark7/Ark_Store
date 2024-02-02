@@ -1,55 +1,129 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useContext } from 'react'
-import { contextStore } from '../store/StoreContext'
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useContext} from 'react';
+import {contextStore} from '../store/StoreContext';
+import HeaderBar from '../component/HeaderBar';
 
-const OrderHistoryList = () => {
-  const{OrderHistoryList}=useContext(contextStore)
- 
-  
+const OrderHistoryList = ({navigation}:any) => {
+  const {OrderHistoryList} = useContext(contextStore);
+  console.log(OrderHistoryList);
+
   return (
     <View style={styles.ScreenContainer}>
       <ScrollView style={styles.ScrollViewFlex}>
-        {
-          OrderHistoryList.map((item:any,index)=>(
-            <TouchableOpacity style={styles.OrderListContainer}>
-              <View style={styles.TopContainer}>
-                  <View>
-                    <Text style={styles.subTitle}>Order Time</Text>
-                    <Text style={styles.title}>{item.OrderDate}</Text>
-                  </View>
-                  <View>
-                    <Text style={styles.subTitle}>Total Amount</Text>
-                    <Text style={styles.title}>{item.CartListPrice}</Text>
-                  </View>
+        <HeaderBar title="Order History" />
+        {OrderHistoryList.map((item: any, index) => (
+          <View style={styles.OrderListContainer} key={index}>
+            <View style={styles.TopContainer}>
+              <View>
+                <Text style={styles.subTitle}>Order Time</Text>
+                <Text style={styles.titleTxt}>{item.OrderDate}</Text>
               </View>
-            </TouchableOpacity>
-          ))
-        }
-
+              <View>
+                <Text style={styles.subTitle}>Total Amount</Text>
+                <Text style={styles.PriceTxt}>${item.CartListPrice}</Text>
+              </View>
+            </View>
+            <View>
+              {item.CartList.map((item: any, index: any) => (
+                <TouchableOpacity
+                  style={styles.ListContainer}
+                  onPress={() => {
+                    navigation.push('Details', {item});
+                  }}>
+                  <View>
+                    <Image
+                      style={styles.image}
+                      source={{uri: item.thumbnail}}
+                    />
+                  </View>
+                  <View style={styles.innerContainer}>
+                    <Text style={styles.title}>
+                      {item.title?.substring(0, 11)}
+                    </Text>
+                    <Text style={styles.brand}>{item.brand}</Text>
+                    <Text style={styles.price}>
+                      $
+                      {Math.round(
+                        item.price -
+                          (item.price * Math.round(item.discountPercentage)) /
+                            100,
+                      )}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        ))}
       </ScrollView>
     </View>
-  )
-}
+  );
+};
 
-export default OrderHistoryList
+export default OrderHistoryList;
 
 const styles = StyleSheet.create({
-  ScreenContainer:{
-    flex:1
+  ScreenContainer: {
+    flex: 1,
+    paddingHorizontal:10
   },
-  ScrollViewFlex:{
-    flexGrow:1
+  ScrollViewFlex: {
+    flexGrow: 1,
   },
-  OrderListContainer:{
-    
+  OrderListContainer: {},
+  TopContainer: {
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+    paddingHorizontal:10
   },
-  TopContainer:{
-
+  subTitle: {
+    fontSize:18,
+    color:'#000',
+    fontWeight:'bold'
   },
-  subTitle:{
-
+  titleTxt: {
+    fontSize:14,
+    color:'#000'
   },
-  title:{
-    
-  }
-})
+  PriceTxt:{
+    fontSize:17,
+    color:'#000',
+    fontWeight:'500'
+  },
+  ListContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+    marginVertical: 10,
+  },
+  image: {
+    width: 140,
+    height: 140,
+    borderRadius: 8,
+    objectFit: 'fill',
+  },
+  innerContainer: {
+    marginLeft: 16,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: '700',
+  },
+  brand: {
+    fontSize: 16,
+    marginTop: 8,
+  },
+  price: {
+    fontSize: 22,
+    color: '#000',
+    fontWeight: 'bold',
+    marginTop: 8,
+  },
+});
