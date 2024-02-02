@@ -11,11 +11,10 @@ export const contextStore = createContext({
 });
 const StoreProvider = ({children}: any) => {
   const [cartList, setcartList] = useState<any>([]);
-  let OrderHistoryList: any = [];
-  console.log("Hey");
+  const [OrderHistoryList, setOrderHistoryList] = useState([]);
+  console.log('Hey');
   console.log(OrderHistoryList);
-  
-  
+
   const addToCart = (item: any) => {
     if (cartList.length == 0) {
       setcartList([...cartList, item]);
@@ -28,7 +27,7 @@ const StoreProvider = ({children}: any) => {
     setcartList(item);
   };
   const addInitialOrderList = (item: any) => {
-    OrderHistoryList = item;
+    setOrderHistoryList(item);
   };
 
   const OrderListFromCartList = async () => {
@@ -52,7 +51,7 @@ const StoreProvider = ({children}: any) => {
         CartListPrice: temp.toFixed(2).toString(),
       });
     }
-    
+
     // await AsyncStorage.setItem('order', JSON.stringify(OrderHistoryList)).then(
     //   async () => {
     //     setcartList([]);
