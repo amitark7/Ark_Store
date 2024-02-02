@@ -39,7 +39,7 @@ const HomeScreen = ({navigation}: any) => {
   };
 
   const CategoryList = (category: any) => {
-    if (category === 'All') {
+    if (category == 'All') {
       setCategoryList(productList);
     } else {
       let list = productList.filter(item => item.category == category);

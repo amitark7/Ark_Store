@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   emptyTxt: {
+    flex:1,
     fontSize: 26,
     fontWeight: 'bold',
     color: '#000',
