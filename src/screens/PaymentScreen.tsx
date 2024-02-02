@@ -84,5 +84,6 @@ const styles = StyleSheet.create({
   numberContainer: {},
   number: {},
   holderContainer: {},
-  title:{}
+  title:{},
+  subTitle:{}
 });
