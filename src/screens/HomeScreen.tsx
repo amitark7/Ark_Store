@@ -17,7 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {contextStore} from '../store/StoreContext';
 
 const HomeScreen = ({navigation}: any) => {
-  const {addInitialCartList} = useContext(contextStore);
+  const {addInitialCartList, addInitialOrderList} = useContext(contextStore);
   const [category, setCategory] = useState([
     'All',
     'smartphones',
@@ -33,8 +33,12 @@ const HomeScreen = ({navigation}: any) => {
 
   const fetchData = async () => {
     const list = await AsyncStorage.getItem('cart');
+    const HistoryList = await AsyncStorage.getItem('order');
     if (list) {
       addInitialCartList(JSON.parse(list));
+    }
+    if (HistoryList) {
+      addInitialOrderList(HistoryList);
     }
   };
 
