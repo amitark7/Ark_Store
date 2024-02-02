@@ -8,6 +8,7 @@ export const contextStore = createContext({
 });
 const StoreProvider = ({children}: any) => {
   const [cartList, setcartList] = useState<any>([]);
+  let OrderHistoryList=[]
 
   const addToCart = (item: any) => {
     if (cartList.length == 0) {
@@ -21,6 +22,15 @@ const StoreProvider = ({children}: any) => {
     setcartList(item);
   };
 
+  const OrderListFromCartList=()=>{
+    let temp = cartList.reduce(
+      (accumalator: number, CurentValue: any) =>
+        accumalator + parseFloat(CurentValue.ItemPrice),
+      0,
+    );
+    console.log(temp);
+    
+  }
   return (
     <contextStore.Provider
       value={{

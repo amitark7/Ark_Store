@@ -1,4 +1,5 @@
 import {
+  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -147,7 +148,7 @@ const PaymentScreen = ({navigation,route}: any) => {
      <TouchableOpacity
        style={styles.buyBtn}
        onPress={() => {
-         navigation.navigate('Payment');
+         Alert.alert('Success','Succesfully Payment Done')
        }}>
        <CustomIcon
          name="keyboard-double-arrow-right"
@@ -297,7 +298,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   buyBtn: {
-    paddingHorizontal:10,
+    width: '62%',
     borderWidth: 2,
     paddingVertical: 12,
     backgroundColor: '#2ecc72',
