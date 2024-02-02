@@ -49,12 +49,14 @@ const StoreProvider = ({children}: any) => {
         CartListPrice: temp.toFixed(2).toString(),
       });
     }
-    await AsyncStorage.setItem('order', JSON.stringify(OrderHistoryList)).then(
-      async () => {
-        setcartList([]);
-        await AsyncStorage.setItem('cart', JSON.stringify(cartList));
-      },
-    );
+    // console.log(OrderHistoryList);
+    
+    // await AsyncStorage.setItem('order', JSON.stringify(OrderHistoryList)).then(
+    //   async () => {
+    //     setcartList([]);
+    //     await AsyncStorage.setItem('cart', JSON.stringify(cartList));
+    //   },
+    // );
   };
   return (
     <contextStore.Provider

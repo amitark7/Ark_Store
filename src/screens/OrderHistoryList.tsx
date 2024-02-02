@@ -14,6 +14,7 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 const OrderHistoryList = ({navigation}:any) => {
   const {OrderHistoryList} = useContext(contextStore);
   const TabHeight=useBottomTabBarHeight()
+  console.log(OrderHistoryList);
   
   return (
     <View style={styles.ScreenContainer}>
