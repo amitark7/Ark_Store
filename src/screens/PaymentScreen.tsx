@@ -151,7 +151,7 @@ const PaymentScreen = ({navigation,route}: any) => {
        style={styles.buyBtn}
        onPress={() => {
         OrderListFromCartList()
-        navigation.navigate('Favorite')
+        navigation.navigate('History')
        }}>
        <CustomIcon
          name="keyboard-double-arrow-right"

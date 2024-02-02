@@ -5,12 +5,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen';
 import CartScreen from './screens/CartScreen';
-import FavoriteScreen from './screens/FavoriteScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import StoreProvider from './store/StoreContext';
 import CustomIcon from './component/CustomIcon';
+import OrderHistoryList from './screens/OrderHistoryList';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -54,8 +54,8 @@ export const Hometabs = () => {
         }}
       />
       <Tab.Screen
-        name="Favorite"
-        component={FavoriteScreen}
+        name="History"
+        component={OrderHistoryList}
         options={{
           tabBarIcon: ({focused}) => (
             <CustomIcon

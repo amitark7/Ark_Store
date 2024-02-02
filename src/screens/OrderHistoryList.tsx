@@ -2,7 +2,7 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-nati
 import React, { useContext } from 'react'
 import { contextStore } from '../store/StoreContext'
 
-const FavoriteScreen = () => {
+const OrderHistoryList = () => {
   const{OrderHistoryList}=useContext(contextStore)
  
   
@@ -10,9 +10,18 @@ const FavoriteScreen = () => {
     <View style={styles.ScreenContainer}>
       <ScrollView style={styles.ScrollViewFlex}>
         {
-          OrderHistoryList.map((item,index)=>(
+          OrderHistoryList.map((item:any,index)=>(
             <TouchableOpacity style={styles.OrderListContainer}>
-
+              <View style={styles.TopContainer}>
+                  <View>
+                    <Text style={styles.subTitle}>Order Time</Text>
+                    <Text style={styles.title}>{item.OrderDate}</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.subTitle}>Total Amount</Text>
+                    <Text style={styles.title}>{item.CartListPrice}</Text>
+                  </View>
+              </View>
             </TouchableOpacity>
           ))
         }
@@ -22,7 +31,7 @@ const FavoriteScreen = () => {
   )
 }
 
-export default FavoriteScreen
+export default OrderHistoryList
 
 const styles = StyleSheet.create({
   ScreenContainer:{
@@ -32,6 +41,15 @@ const styles = StyleSheet.create({
     flexGrow:1
   },
   OrderListContainer:{
+    
+  },
+  TopContainer:{
+
+  },
+  subTitle:{
+
+  },
+  title:{
     
   }
 })
