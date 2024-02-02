@@ -11,6 +11,29 @@ import CustomIcon from '../component/CustomIcon';
 import LinearGradient from 'react-native-linear-gradient';
 
 const PaymentScreen = ({navigation}: any) => {
+  const PaymentList = [
+    {
+      name: 'Wallet',
+      icon: 'icon',
+      isIcon: true,
+    },
+    {
+      name: 'Google Pay',
+      icon: require('../assets/app_images/gpay.png'),
+      isIcon: false,
+    },
+    {
+      name: 'Apple Pay',
+      icon: require('../assets/app_images/applepay.png'),
+      isIcon: false,
+    },
+    {
+      name: 'Amazon Pay',
+      icon: require('../assets/app_images/amazonpay.png'),
+      isIcon: false,
+    },
+  ];
+
   return (
     <ScrollView style={styles.Container}>
       <View style={styles.TopContainer}>
@@ -32,7 +55,10 @@ const PaymentScreen = ({navigation}: any) => {
             colors={['#7B8788', '#000']}
             style={styles.cardContainer}>
             <View style={styles.cardTopContainer}>
-              <Image style={styles.visaImage} source={require('../assets/chip.png')}/>
+              <Image
+                style={styles.visaImage}
+                source={require('../assets/chip.png')}
+              />
               <Image
                 style={styles.visaImage}
                 source={require('../assets/visa.png')}
@@ -46,16 +72,50 @@ const PaymentScreen = ({navigation}: any) => {
             </View>
             <View style={styles.holderContainer}>
               <View>
-                <Text style={styles.title}>Card Holder Name</Text>
-                <Text style={styles.subTitle}>Amit Kumar</Text>
+                <Text style={styles.subTitle}>Card Holder Name</Text>
+                <Text style={styles.title}>Amit Ark</Text>
               </View>
               <View>
-                <Text style={styles.title}>Expiry Date</Text>
-                <Text style={styles.subTitle}>02/28</Text>
+                <Text style={styles.subTitle}>Expiry Date</Text>
+                <Text style={styles.title}>02/28</Text>
               </View>
             </View>
           </LinearGradient>
         </View>
+        {
+          PaymentList.map(({name,icon,isIcon},index)=>(
+            <View key={index}>
+              {
+                isIcon?(
+                  <LinearGradient
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 1}}
+                  colors={['#7B8788', '#000']}
+                  style={styles.LinearGradeintWallet}>
+                  <View style={styles.WallerRow}>
+                    <CustomIcon
+                      name="wallet"
+                      color='#2ecc72'
+                      size={30}
+                    />
+                    <Text style={styles.PaymentTitle}>{name}</Text>
+                  </View>
+                  <Text style={styles.PaymentPrice}>$ 100.50</Text>
+                </LinearGradient>
+                ):(
+                  <LinearGradient
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 1}}
+                  colors={['#7B8788', '#000']}
+                  style={styles.LinearGradeintRegular}>
+                  <Image source={icon} style={styles.PaymentImage} />
+                  <Text style={styles.PaymentTitle}>{name}</Text>
+                </LinearGradient>
+                )
+              }
+            </View>
+          ))
+        }
       </View>
     </ScrollView>
   );
@@ -87,38 +147,73 @@ const styles = StyleSheet.create({
   },
   midContainer: {},
   creditCardContainer: {
-    paddingHorizontal:10,
-    marginTop:10
+    paddingHorizontal: 10,
+    marginTop: 10,
+    borderWidth: 2,
+    marginHorizontal: 10,
+    borderRadius: 8,
+    paddingVertical: 4,
   },
-  cardTitle: {},
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#000',
+    marginBottom: 6,
+    paddingHorizontal: 4,
+  },
   cardContainer: {
-    marginHorizontal:4,
-    borderRadius:8
+    marginHorizontal: 4,
+    borderRadius: 14,
+    paddingVertical: 10,
   },
   cardTopContainer: {
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'center',
-    paddingHorizontal:20,
-    paddingVertical:20
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 20,
   },
   numberContainer: {
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-evenly'
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 16,
+    marginTop: 20,
   },
   number: {
-    color:'#fff',
-    letterSpacing:2,
-    fontWeight:'700',
-    fontSize:18,
+    color: '#fff',
+    letterSpacing: 2,
+    fontWeight: '700',
+    fontSize: 20,
+  },
+  holderContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    marginVertical: 20,
+  },
+  title: {
+    fontSize: 21,
+    fontWeight: '600',
+    color: '#fff',
+  },
+  subTitle: {
+    fontSize: 14,
+    color: '#99AAAB',
+  },
+  visaImage: {
+    width: 90,
+    height: 30,
+    marginLeft: -20,
+  },
+  LinearGradeintWallet:{
 
   },
-  holderContainer: {},
-  title: {},
-  subTitle: {},
-  visaImage: {
-    width:90,
-    height:30
+  WallerRow:{
+
   },
+  PaymentTitle:{},
+  PaymentPrice:{},
+  LinearGradeintRegular:{},
+  PaymentImage:{}
 });
