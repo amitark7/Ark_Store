@@ -3,15 +3,15 @@ import {createContext, useState} from 'react';
 
 export const contextStore = createContext({
   cartList: [],
-  OrderHistoryList:[],
+  OrderHistoryList: [],
   addToCart: (arg0: any) => {},
   addInitialCartList: (arg0: any) => {},
-  addInitialOrderList:(arg0:any)=>{},
-  OrderListFromCartList:()=>{}
+  addInitialOrderList: (arg0: any) => {},
+  OrderListFromCartList: () => {},
 });
 const StoreProvider = ({children}: any) => {
   const [cartList, setcartList] = useState<any>([]);
-  let OrderHistoryList: any=[]
+  let OrderHistoryList: any = [];
 
   const addToCart = (item: any) => {
     if (cartList.length == 0) {
@@ -24,11 +24,11 @@ const StoreProvider = ({children}: any) => {
   const addInitialCartList = (item: any) => {
     setcartList(item);
   };
-  const addInitialOrderList=(item:any)=>{
-    OrderHistoryList=item
-  }
+  const addInitialOrderList = (item: any) => {
+    OrderHistoryList = item;
+  };
 
-  const OrderListFromCartList=async ()=>{
+  const OrderListFromCartList = async () => {
     let temp = cartList.reduce(
       (accumalator: number, CurentValue: any) =>
         accumalator + parseFloat(CurentValue.price),
@@ -37,26 +37,25 @@ const StoreProvider = ({children}: any) => {
     if (OrderHistoryList.length > 0) {
       OrderHistoryList.unshift({
         OrderDate:
-          new Date().toDateString() +
-          ' ' +
-          new Date().toLocaleTimeString(),
+          new Date().toDateString() + ' ' + new Date().toLocaleTimeString(),
         CartList: cartList,
         CartListPrice: temp.toFixed(2).toString(),
       });
     } else {
       OrderHistoryList.push({
         OrderDate:
-          new Date().toDateString() +
-          ' ' +
-          new Date().toLocaleTimeString(),
+          new Date().toDateString() + ' ' + new Date().toLocaleTimeString(),
         CartList: cartList,
         CartListPrice: temp.toFixed(2).toString(),
       });
     }
-    setcartList([])
-    await AsyncStorage.setItem('cart',JSON.stringify(cartList))
-    await AsyncStorage.setItem('order',JSON.stringify(OrderHistoryList))
-  }
+    await AsyncStorage.setItem('order', JSON.stringify(OrderHistoryList)).then(
+      async () => {
+        setcartList([]);
+        await AsyncStorage.setItem('cart', JSON.stringify(cartList));
+      },
+    );
+  };
   return (
     <contextStore.Provider
       value={{
@@ -65,7 +64,7 @@ const StoreProvider = ({children}: any) => {
         addToCart,
         addInitialCartList,
         OrderListFromCartList,
-        addInitialOrderList
+        addInitialOrderList,
       }}>
       {children}
     </contextStore.Provider>

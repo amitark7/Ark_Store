@@ -38,7 +38,7 @@ const HomeScreen = ({navigation}: any) => {
       addInitialCartList(JSON.parse(list));
     }
     if (HistoryList) {
-      addInitialOrderList(HistoryList);
+      addInitialOrderList(JSON.parse(HistoryList));
     }
   };
 
