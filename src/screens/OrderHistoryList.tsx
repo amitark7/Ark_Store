@@ -17,7 +17,7 @@ const OrderHistoryList = ({navigation}:any) => {
   
   return (
     <View style={styles.ScreenContainer}>
-      <ScrollView style={[styles.ScrollViewFlex,{marginBottom:TabHeight}]} showsVerticalScrollIndicator={false}>
+      <ScrollView style={[styles.ScrollViewFlex]} showsVerticalScrollIndicator={false}>
         <HeaderBar title="Order History" />
         {OrderHistoryList.map((item: any, index) => (
           <View style={styles.OrderListContainer} key={index}>
@@ -34,6 +34,7 @@ const OrderHistoryList = ({navigation}:any) => {
             <View>
               {item.CartList.map((item: any, index: any) => (
                 <TouchableOpacity
+                key={index}
                   style={styles.ListContainer}
                   onPress={() => {
                     navigation.push('Details', {item});
@@ -64,6 +65,17 @@ const OrderHistoryList = ({navigation}:any) => {
           </View>
         ))}
       </ScrollView>
+      <View style={[styles.bottomContainer,{marginBottom:TabHeight}]}>
+        <Text style={styles.cartPrice}>$320</Text>
+        <TouchableOpacity
+          style={styles.buyBtn}
+          onPress={() => {
+            // OrderListFromCartList();
+            // navigation.navigate('History');
+          }}>
+          <Text style={styles.BuyTxt}>Download</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -129,5 +141,34 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
     marginTop: 8,
+  },
+  bottomContainer: {
+    height: 80,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
+  buyBtn: {
+    width: '50%',
+    borderWidth: 2,
+    paddingVertical: 12,
+    backgroundColor: '#2ecc72',
+    borderColor: '#2ecc72',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  BuyTxt: {
+    color: '#fff',
+    fontSize: 17,
+    fontWeight: '500',
+  },
+  cartPrice: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#000',
   },
 });

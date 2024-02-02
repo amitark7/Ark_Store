@@ -10,12 +10,12 @@ import {
 import React, {useContext, useState} from 'react';
 import CustomIcon from '../component/CustomIcon';
 import LinearGradient from 'react-native-linear-gradient';
-import { contextStore } from '../store/StoreContext';
+import {contextStore} from '../store/StoreContext';
 
-const PaymentScreen = ({navigation,route}: any) => {
+const PaymentScreen = ({navigation, route}: any) => {
   const [selectedPay, setSelectedPay] = useState('Wallet');
-  const PayAmount=route.params.price
-  const {OrderListFromCartList}=useContext(contextStore)
+  const PayAmount = route.params.price;
+  const {OrderListFromCartList} = useContext(contextStore);
   const PaymentList = [
     {
       name: 'Wallet',
@@ -41,127 +41,128 @@ const PaymentScreen = ({navigation,route}: any) => {
 
   return (
     <>
-    <ScrollView style={styles.Container}>
-      <View style={styles.TopContainer}>
-        <Text style={styles.HeaderTxt}>Payments</Text>
-        <TouchableOpacity
-          style={styles.backBtn}
-          onPress={() => {
-            navigation.pop();
-          }}>
-          <CustomIcon name="chevron-left" size={24} color="#000" />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.midContainer}>
-        <TouchableOpacity onPress={()=>{
-          setSelectedPay('Credit Card')
-        }}>
-          <View
-            style={[
-              styles.creditCardContainer,
-              {
-                borderColor:
-                  selectedPay === 'Credit Card' ? '#2ecc72' : '#99AAAB',
-              },
-            ]}>
-            <Text style={styles.cardTitle}>Credit Card</Text>
-            <LinearGradient
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 1}}
-              colors={['#7B8788', '#000']}
-              style={styles.cardContainer}>
-              <View style={styles.cardTopContainer}>
-                <Image
-                  style={styles.visaImage}
-                  source={require('../assets/chip.png')}
-                />
-                <Image
-                  style={styles.visaImage}
-                  source={require('../assets/visa.png')}
-                />
-              </View>
-              <View style={styles.numberContainer}>
-                <Text style={styles.number}>3703</Text>
-                <Text style={styles.number}>5177</Text>
-                <Text style={styles.number}>7777</Text>
-                <Text style={styles.number}>3703</Text>
-              </View>
-              <View style={styles.holderContainer}>
-                <View>
-                  <Text style={styles.subTitle}>Card Holder Name</Text>
-                  <Text style={styles.title}>Amit Ark</Text>
-                </View>
-                <View>
-                  <Text style={styles.subTitle}>Expiry Date</Text>
-                  <Text style={styles.title}>02/28</Text>
-                </View>
-              </View>
-            </LinearGradient>
-          </View>
-        </TouchableOpacity>
-        {PaymentList.map(({name, icon, isIcon}, index) => (
+      <ScrollView style={styles.Container}>
+        <View style={styles.TopContainer}>
+          <Text style={styles.HeaderTxt}>Payments</Text>
           <TouchableOpacity
-            key={index}
+            style={styles.backBtn}
             onPress={() => {
-              setSelectedPay(name);
+              navigation.pop();
             }}>
-            {isIcon ? (
-              <LinearGradient
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
-                colors={['#7B8788', '#000']}
-                style={[
-                  styles.LinearGradeintWallet,
-                  {
-                    borderColor: selectedPay === name ? '#2ecc72' : '#99AAAB',
-                  },
-                ]}>
-                <View style={styles.WallerRow}>
-                  <CustomIcon
-                    name="account-balance-wallet"
-                    color="#2ecc72"
-                    size={30}
-                  />
-                  <Text style={styles.PaymentTitle}>{name}</Text>
-                </View>
-                <Text style={styles.PaymentPrice}>$ 100.50</Text>
-              </LinearGradient>
-            ) : (
-              <LinearGradient
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
-                colors={['#7B8788', '#000']}
-                style={[
-                  styles.LinearGradeintRegular,
-                  {
-                    borderColor: selectedPay === name ? '#2ecc72' : '#99AAAB',
-                  },
-                ]}>
-                <Image source={icon} style={styles.PaymentImage} />
-                <Text style={styles.PaymentTitle}>{name}</Text>
-              </LinearGradient>
-            )}
+            <CustomIcon name="chevron-left" size={24} color="#000" />
           </TouchableOpacity>
-        ))}
+        </View>
+        <View style={styles.midContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              setSelectedPay('Credit Card');
+            }}>
+            <View
+              style={[
+                styles.creditCardContainer,
+                {
+                  borderColor:
+                    selectedPay === 'Credit Card' ? '#2ecc72' : '#99AAAB',
+                },
+              ]}>
+              <Text style={styles.cardTitle}>Credit Card</Text>
+              <LinearGradient
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
+                colors={['#7B8788', '#000']}
+                style={styles.cardContainer}>
+                <View style={styles.cardTopContainer}>
+                  <Image
+                    style={styles.visaImage}
+                    source={require('../assets/chip.png')}
+                  />
+                  <Image
+                    style={styles.visaImage}
+                    source={require('../assets/visa.png')}
+                  />
+                </View>
+                <View style={styles.numberContainer}>
+                  <Text style={styles.number}>3703</Text>
+                  <Text style={styles.number}>5177</Text>
+                  <Text style={styles.number}>7777</Text>
+                  <Text style={styles.number}>3703</Text>
+                </View>
+                <View style={styles.holderContainer}>
+                  <View>
+                    <Text style={styles.subTitle}>Card Holder Name</Text>
+                    <Text style={styles.title}>Amit Ark</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.subTitle}>Expiry Date</Text>
+                    <Text style={styles.title}>02/28</Text>
+                  </View>
+                </View>
+              </LinearGradient>
+            </View>
+          </TouchableOpacity>
+          {PaymentList.map(({name, icon, isIcon}, index) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => {
+                setSelectedPay(name);
+              }}>
+              {isIcon ? (
+                <LinearGradient
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 1}}
+                  colors={['#7B8788', '#000']}
+                  style={[
+                    styles.LinearGradeintWallet,
+                    {
+                      borderColor: selectedPay === name ? '#2ecc72' : '#99AAAB',
+                    },
+                  ]}>
+                  <View style={styles.WallerRow}>
+                    <CustomIcon
+                      name="account-balance-wallet"
+                      color="#2ecc72"
+                      size={30}
+                    />
+                    <Text style={styles.PaymentTitle}>{name}</Text>
+                  </View>
+                  <Text style={styles.PaymentPrice}>$ 100.50</Text>
+                </LinearGradient>
+              ) : (
+                <LinearGradient
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 1}}
+                  colors={['#7B8788', '#000']}
+                  style={[
+                    styles.LinearGradeintRegular,
+                    {
+                      borderColor: selectedPay === name ? '#2ecc72' : '#99AAAB',
+                    },
+                  ]}>
+                  <Image source={icon} style={styles.PaymentImage} />
+                  <Text style={styles.PaymentTitle}>{name}</Text>
+                </LinearGradient>
+              )}
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
+      <View style={styles.bottomContainer}>
+        <Text style={styles.cartPrice}>${PayAmount}</Text>
+        <TouchableOpacity
+          style={styles.buyBtn}
+          onPress={() => {
+            OrderListFromCartList();
+            navigation.navigate('History');
+          }}>
+          <CustomIcon
+            name="keyboard-double-arrow-right"
+            size={24}
+            color="#fff"
+          />
+          <Text style={styles.BuyTxt}>{`Pay With ${selectedPay}`}</Text>
+        </TouchableOpacity>
       </View>
-    </ScrollView>
-     <View style={styles.bottomContainer}>
-     <Text style={styles.cartPrice}>${PayAmount}</Text>
-     <TouchableOpacity
-       style={styles.buyBtn}
-       onPress={() => {
-        OrderListFromCartList()
-        navigation.navigate('History')
-       }}>
-       <CustomIcon
-         name="keyboard-double-arrow-right"
-         size={24}
-         color="#fff"
-       />
-       <Text style={styles.BuyTxt}>{`Pay With ${selectedPay}`}</Text>
-     </TouchableOpacity>
-   </View>
-   </>
+    </>
   );
 };
 
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
   },
   midContainer: {
     marginHorizontal: 4,
-    marginTop:20
+    marginTop: 20,
   },
   creditCardContainer: {
     paddingHorizontal: 10,

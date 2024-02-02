@@ -11,7 +11,7 @@ export const contextStore = createContext({
 });
 const StoreProvider = ({children}: any) => {
   const [cartList, setcartList] = useState<any>([]);
-  const [OrderHistoryList, setOrderHistoryList] = useState([]);
+  const [OrderHistoryList, setOrderHistoryList] = useState<any>([]);
   console.log('Hey');
   console.log(OrderHistoryList);
 
@@ -31,26 +31,26 @@ const StoreProvider = ({children}: any) => {
   };
 
   const OrderListFromCartList = async () => {
-    let temp = cartList.reduce(
-      (accumalator: number, CurentValue: any) =>
-        accumalator + parseFloat(CurentValue.price),
-      0,
-    );
-    if (OrderHistoryList.length > 0) {
-      OrderHistoryList.unshift({
-        OrderDate:
-          new Date().toDateString() + ' ' + new Date().toLocaleTimeString(),
-        CartList: cartList,
-        CartListPrice: temp.toFixed(2).toString(),
-      });
-    } else {
-      OrderHistoryList.push({
-        OrderDate:
-          new Date().toDateString() + ' ' + new Date().toLocaleTimeString(),
-        CartList: cartList,
-        CartListPrice: temp.toFixed(2).toString(),
-      });
-    }
+    // let temp = cartList.reduce(
+    //   (accumalator: number, CurentValue: any) =>
+    //     accumalator + parseFloat(CurentValue.price),
+    //   0,
+    // );
+    // if (OrderHistoryList.length > 0) {
+    //   setOrderHistoryList[{
+    //     OrderDate:
+    //       new Date().toDateString() + ' ' + new Date().toLocaleTimeString(),
+    //     CartList: cartList,
+    //     CartListPrice: temp.toFixed(2).toString()
+    //   },...OrderHistoryList];
+    // } else {
+    //   setOrderHistoryList[...OrderHistoryList,{
+    //     OrderDate:
+    //       new Date().toDateString() + ' ' + new Date().toLocaleTimeString(),
+    //     CartList: cartList,
+    //     CartListPrice: temp.toFixed(2).toString(),
+    //   }];
+    // }
 
     // await AsyncStorage.setItem('order', JSON.stringify(OrderHistoryList)).then(
     //   async () => {
