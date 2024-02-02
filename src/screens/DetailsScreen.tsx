@@ -44,7 +44,7 @@ const DetailsScreen = ({route, navigation}: any) => {
                 onPress={() => {
                   navigation.pop();
                 }}>
-                <CustomIcon name="arrow-back" size={24} color="#000" />
+                <CustomIcon name="chevron-left" size={24} color="#000" />
               </TouchableOpacity>
               <TouchableOpacity style={styles.icon}>
                 <CustomIcon name="favorite" size={24} color="#000" />

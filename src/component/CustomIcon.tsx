@@ -1,4 +1,3 @@
-
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -13,4 +12,3 @@ const CustomIcon: React.FC<CustomIconProp> = ({name, color, size}) => {
 };
 
 export default CustomIcon;
-

@@ -1,4 +1,5 @@
 import {
+  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -7,6 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import CustomIcon from '../component/CustomIcon';
+import LinearGradient from 'react-native-linear-gradient';
 
 const PaymentScreen = ({navigation}: any) => {
   return (
@@ -18,16 +20,23 @@ const PaymentScreen = ({navigation}: any) => {
           onPress={() => {
             navigation.pop();
           }}>
-          <CustomIcon name="arrow-back" size={24} color="#000" />
+          <CustomIcon name="chevron-left" size={24} color="#000" />
         </TouchableOpacity>
       </View>
       <View style={styles.midContainer}>
         <View style={styles.creditCardContainer}>
           <Text style={styles.cardTitle}>Credit Card</Text>
-          <View style={styles.cardContainer}>
+          <LinearGradient
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 1}}
+            colors={['#7B8788', '#000']}
+            style={styles.cardContainer}>
             <View style={styles.cardTopContainer}>
-              <CustomIcon name="" size={28} color="#fff" />
-              <CustomIcon name="" size={28} color="#fff" />
+              <Image style={styles.visaImage} source={require('../assets/chip.png')}/>
+              <Image
+                style={styles.visaImage}
+                source={require('../assets/visa.png')}
+              />
             </View>
             <View style={styles.numberContainer}>
               <Text style={styles.number}>3703</Text>
@@ -45,7 +54,7 @@ const PaymentScreen = ({navigation}: any) => {
                 <Text style={styles.subTitle}>02/28</Text>
               </View>
             </View>
-          </View>
+          </LinearGradient>
         </View>
       </View>
     </ScrollView>
@@ -77,13 +86,39 @@ const styles = StyleSheet.create({
     top: '30%',
   },
   midContainer: {},
-  creditCardContainer: {},
+  creditCardContainer: {
+    paddingHorizontal:10,
+    marginTop:10
+  },
   cardTitle: {},
-  cardContainer: {},
-  cardTopContainer: {},
-  numberContainer: {},
-  number: {},
+  cardContainer: {
+    marginHorizontal:4,
+    borderRadius:8
+  },
+  cardTopContainer: {
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+    paddingHorizontal:20,
+    paddingVertical:20
+  },
+  numberContainer: {
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-evenly'
+  },
+  number: {
+    color:'#fff',
+    letterSpacing:2,
+    fontWeight:'700',
+    fontSize:18,
+
+  },
   holderContainer: {},
-  title:{},
-  subTitle:{}
+  title: {},
+  subTitle: {},
+  visaImage: {
+    width:90,
+    height:30
+  },
 });

@@ -8,9 +8,9 @@ import CartScreen from './screens/CartScreen';
 import FavoriteScreen from './screens/FavoriteScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import DetailsScreen from './screens/DetailsScreen';
-import CustomIcon from './component/CustomIcon';
 import PaymentScreen from './screens/PaymentScreen';
 import StoreProvider from './store/StoreContext';
+import CustomIcon from './component/CustomIcon';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
