@@ -25,27 +25,27 @@ const HomeScreen = ({navigation}: any) => {
     'fragrances',
     'skincare',
     'groceries',
-    'home-decoration'
+    'home-decoration',
   ]);
   const [selectCategory, setSelectCategory] = useState('All');
   const TabHeight = useBottomTabBarHeight();
-  const[categoryList,setCategoryList]=useState<any>(productList)
+  const [categoryList, setCategoryList] = useState<any>(productList);
 
   const fetchData = async () => {
-    const list = await AsyncStorage.getItem('cart');  
+    const list = await AsyncStorage.getItem('cart');
     if (list) {
       addInitialCartList(JSON.parse(list));
     }
   };
 
-  const CategoryList=(category:any)=>{
-    if(category==='All'){
-      setCategoryList(productList)
-    }else{
-      let list=productList.filter((item)=>item.category==category)
-      setCategoryList(list)
+  const CategoryList = (category: any) => {
+    if (category === 'All') {
+      setCategoryList(productList);
+    } else {
+      let list = productList.filter(item => item.category == category);
+      setCategoryList(list);
     }
-  } 
+  };
 
   useEffect(() => {
     fetchData();
@@ -91,7 +91,7 @@ const HomeScreen = ({navigation}: any) => {
                     borderColor: selectCategory === item ? '#2ecc72' : '#000',
                   },
                 ]}>
-                {item.charAt(0).toUpperCase()+item.substring(1)}
+                {item.charAt(0).toUpperCase() + item.substring(1)}
               </Text>
             </TouchableOpacity>
           )}
@@ -131,7 +131,8 @@ const HomeScreen = ({navigation}: any) => {
                 <Text style={styles.currentPrice}>
                   $
                   {Math.round(
-                    item.price - (item.price * Math.round(item.discountPercentage)) / 100,
+                    item.price -
+                      (item.price * Math.round(item.discountPercentage)) / 100,
                   )}
                 </Text>
                 <Text style={styles.OrigionalPrice}>${item.price}</Text>
