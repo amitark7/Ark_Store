@@ -198,8 +198,14 @@ const styles = StyleSheet.create({
     height: 30,
     marginLeft: -20,
   },
-  LinearGradeintWallet: {},
-  WallerRow: {},
+  LinearGradeintWallet: {
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center'
+  },
+  WallerRow: {
+    flexDirection:'row'
+  },
   PaymentTitle: {},
   PaymentPrice: {},
   LinearGradeintRegular: {},
