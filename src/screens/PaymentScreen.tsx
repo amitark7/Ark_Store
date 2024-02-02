@@ -36,6 +36,7 @@ const PaymentScreen = ({navigation}: any) => {
   ];
 
   return (
+    <>
     <ScrollView style={styles.Container}>
       <View style={styles.TopContainer}>
         <Text style={styles.HeaderTxt}>Payments</Text>
@@ -140,6 +141,22 @@ const PaymentScreen = ({navigation}: any) => {
         ))}
       </View>
     </ScrollView>
+     <View style={[styles.bottomContainer, {marginBottom: TabHeight}]}>
+     <Text style={styles.cartPrice}>${cartPrice}</Text>
+     <TouchableOpacity
+       style={styles.buyBtn}
+       onPress={() => {
+         navigation.navigate('Payment');
+       }}>
+       <CustomIcon
+         name="keyboard-double-arrow-right"
+         size={24}
+         color="#fff"
+       />
+       <Text style={styles.BuyTxt}>Pay Now</Text>
+     </TouchableOpacity>
+   </View>
+   </>
   );
 };
 
