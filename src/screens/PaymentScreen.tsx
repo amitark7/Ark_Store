@@ -82,40 +82,32 @@ const PaymentScreen = ({navigation}: any) => {
             </View>
           </LinearGradient>
         </View>
-        {
-          PaymentList.map(({name,icon,isIcon},index)=>(
-            <View key={index}>
-              {
-                isIcon?(
-                  <LinearGradient
-                  start={{x: 0, y: 0}}
-                  end={{x: 1, y: 1}}
-                  colors={['#7B8788', '#000']}
-                  style={styles.LinearGradeintWallet}>
-                  <View style={styles.WallerRow}>
-                    <CustomIcon
-                      name="wallet"
-                      color='#2ecc72'
-                      size={30}
-                    />
-                    <Text style={styles.PaymentTitle}>{name}</Text>
-                  </View>
-                  <Text style={styles.PaymentPrice}>$ 100.50</Text>
-                </LinearGradient>
-                ):(
-                  <LinearGradient
-                  start={{x: 0, y: 0}}
-                  end={{x: 1, y: 1}}
-                  colors={['#7B8788', '#000']}
-                  style={styles.LinearGradeintRegular}>
-                  <Image source={icon} style={styles.PaymentImage} />
+        {PaymentList.map(({name, icon, isIcon}, index) => (
+          <View key={index}>
+            {isIcon ? (
+              <LinearGradient
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
+                colors={['#7B8788', '#000']}
+                style={styles.LinearGradeintWallet}>
+                <View style={styles.WallerRow}>
+                  <CustomIcon name="wallet" color="#2ecc72" size={30} />
                   <Text style={styles.PaymentTitle}>{name}</Text>
-                </LinearGradient>
-                )
-              }
-            </View>
-          ))
-        }
+                </View>
+                <Text style={styles.PaymentPrice}>$ 100.50</Text>
+              </LinearGradient>
+            ) : (
+              <LinearGradient
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
+                colors={['#7B8788', '#000']}
+                style={styles.LinearGradeintRegular}>
+                <Image source={icon} style={styles.PaymentImage} />
+                <Text style={styles.PaymentTitle}>{name}</Text>
+              </LinearGradient>
+            )}
+          </View>
+        ))}
       </View>
     </ScrollView>
   );
@@ -206,14 +198,10 @@ const styles = StyleSheet.create({
     height: 30,
     marginLeft: -20,
   },
-  LinearGradeintWallet:{
-
-  },
-  WallerRow:{
-
-  },
-  PaymentTitle:{},
-  PaymentPrice:{},
-  LinearGradeintRegular:{},
-  PaymentImage:{}
+  LinearGradeintWallet: {},
+  WallerRow: {},
+  PaymentTitle: {},
+  PaymentPrice: {},
+  LinearGradeintRegular: {},
+  PaymentImage: {},
 });
