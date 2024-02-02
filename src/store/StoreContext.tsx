@@ -3,12 +3,14 @@ import {createContext, useState} from 'react';
 
 export const contextStore = createContext({
   cartList: [],
+  OrderHistoryList:[],
   addToCart: (arg0: any) => {},
   addInitialCartList: (arg0: any) => {},
+  OrderListFromCartList:()=>{}
 });
 const StoreProvider = ({children}: any) => {
   const [cartList, setcartList] = useState<any>([]);
-  let OrderHistoryList=[]
+  let OrderHistoryList: any=[]
 
   const addToCart = (item: any) => {
     if (cartList.length == 0) {
@@ -25,18 +27,37 @@ const StoreProvider = ({children}: any) => {
   const OrderListFromCartList=()=>{
     let temp = cartList.reduce(
       (accumalator: number, CurentValue: any) =>
-        accumalator + parseFloat(CurentValue.ItemPrice),
+        accumalator + parseFloat(CurentValue.price),
       0,
     );
-    console.log(temp);
-    
+    if (OrderHistoryList.length > 0) {
+      OrderHistoryList.unshift({
+        OrderDate:
+          new Date().toDateString() +
+          ' ' +
+          new Date().toLocaleTimeString(),
+        CartList: cartList,
+        CartListPrice: temp.toFixed(2).toString(),
+      });
+    } else {
+      OrderHistoryList.push({
+        OrderDate:
+          new Date().toDateString() +
+          ' ' +
+          new Date().toLocaleTimeString(),
+        CartList: cartList,
+        CartListPrice: temp.toFixed(2).toString(),
+      });
+    }
   }
   return (
     <contextStore.Provider
       value={{
         cartList,
+        OrderHistoryList,
         addToCart,
         addInitialCartList,
+        OrderListFromCartList
       }}>
       {children}
     </contextStore.Provider>

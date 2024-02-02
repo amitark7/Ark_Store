@@ -7,13 +7,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import CustomIcon from '../component/CustomIcon';
 import LinearGradient from 'react-native-linear-gradient';
+import { contextStore } from '../store/StoreContext';
 
 const PaymentScreen = ({navigation,route}: any) => {
   const [selectedPay, setSelectedPay] = useState('Wallet');
   const PayAmount=route.params.price
+  const {OrderListFromCartList}=useContext(contextStore)
   const PaymentList = [
     {
       name: 'Wallet',
@@ -148,7 +150,8 @@ const PaymentScreen = ({navigation,route}: any) => {
      <TouchableOpacity
        style={styles.buyBtn}
        onPress={() => {
-         Alert.alert('Success','Succesfully Payment Done')
+        OrderListFromCartList()
+        navigation.navigate('Favorite')
        }}>
        <CustomIcon
          name="keyboard-double-arrow-right"
