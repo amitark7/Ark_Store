@@ -39,7 +39,6 @@ const HomeScreen = ({navigation}: any) => {
   };
 
   const CategoryList=(category:any)=>{
-    setSelectCategory(category)
     if(category==='All'){
       setCategoryList(productList)
     }else{
@@ -79,6 +78,7 @@ const HomeScreen = ({navigation}: any) => {
             <TouchableOpacity
               style={[styles.CategoryList]}
               onPress={() => {
+                setSelectCategory(item);
                 CategoryList(item);
               }}>
               <Text
