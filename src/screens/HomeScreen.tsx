@@ -51,7 +51,7 @@ const HomeScreen = ({navigation}: any) => {
     fetchData();
   }, []);
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <HeaderBar title="" />
       <View style={styles.inputContainer}>
         <TextInput

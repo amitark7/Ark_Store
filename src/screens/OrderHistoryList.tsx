@@ -9,14 +9,15 @@ import {
 import React, {useContext} from 'react';
 import {contextStore} from '../store/StoreContext';
 import HeaderBar from '../component/HeaderBar';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 const OrderHistoryList = ({navigation}:any) => {
   const {OrderHistoryList} = useContext(contextStore);
-  console.log(OrderHistoryList);
 
+  const TabHeight=useBottomTabBarHeight()
   return (
     <View style={styles.ScreenContainer}>
-      <ScrollView style={styles.ScrollViewFlex}>
+      <ScrollView style={[styles.ScrollViewFlex,{marginBottom:TabHeight}]} showsVerticalScrollIndicator={false}>
         <HeaderBar title="Order History" />
         {OrderHistoryList.map((item: any, index) => (
           <View style={styles.OrderListContainer} key={index}>
@@ -77,7 +78,10 @@ const styles = StyleSheet.create({
   ScrollViewFlex: {
     flexGrow: 1,
   },
-  OrderListContainer: {},
+  OrderListContainer: {
+    paddingHorizontal:1,
+    paddingVertical:10
+  },
   TopContainer: {
     flexDirection:'row',
     justifyContent:'space-between',
@@ -95,7 +99,7 @@ const styles = StyleSheet.create({
   },
   PriceTxt:{
     fontSize:17,
-    color:'#000',
+    color:'#2ecc72',
     fontWeight:'500'
   },
   ListContainer: {

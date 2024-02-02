@@ -44,7 +44,7 @@ const CartScreen = ({navigation}: any) => {
   }, [cartList]);
   return (
     <>
-      <ScrollView style={styles.Container}>
+      <ScrollView style={styles.Container} showsVerticalScrollIndicator={false}>
         <HeaderBar title="Cart" />
         {cartList.length === 0 ? (
           <View style={styles.EmptyContainer}>

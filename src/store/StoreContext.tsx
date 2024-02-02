@@ -6,6 +6,7 @@ export const contextStore = createContext({
   OrderHistoryList:[],
   addToCart: (arg0: any) => {},
   addInitialCartList: (arg0: any) => {},
+  addInitialOrderList:(arg0:any)=>{},
   OrderListFromCartList:()=>{}
 });
 const StoreProvider = ({children}: any) => {
@@ -23,8 +24,11 @@ const StoreProvider = ({children}: any) => {
   const addInitialCartList = (item: any) => {
     setcartList(item);
   };
+  const addInitialOrderList=(item:any)=>{
+    OrderHistoryList=item
+  }
 
-  const OrderListFromCartList=()=>{
+  const OrderListFromCartList=async ()=>{
     let temp = cartList.reduce(
       (accumalator: number, CurentValue: any) =>
         accumalator + parseFloat(CurentValue.price),
@@ -49,6 +53,9 @@ const StoreProvider = ({children}: any) => {
         CartListPrice: temp.toFixed(2).toString(),
       });
     }
+    setcartList([])
+    await AsyncStorage.setItem('cart',JSON.stringify(cartList))
+    await AsyncStorage.setItem('order',JSON.stringify(OrderHistoryList))
   }
   return (
     <contextStore.Provider
@@ -57,7 +64,8 @@ const StoreProvider = ({children}: any) => {
         OrderHistoryList,
         addToCart,
         addInitialCartList,
-        OrderListFromCartList
+        OrderListFromCartList,
+        addInitialOrderList
       }}>
       {children}
     </contextStore.Provider>
