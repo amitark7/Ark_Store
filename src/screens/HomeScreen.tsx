@@ -34,7 +34,6 @@ const HomeScreen = ({navigation}: any) => {
   const fetchData = async () => {
     const list = await AsyncStorage.getItem('cart');
     const HistoryList = await AsyncStorage.getItem('order');
-    console.log(HistoryList);
     
     if (list) {
       addInitialCartList(JSON.parse(list));
