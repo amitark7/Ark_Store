@@ -10,28 +10,22 @@ import {
 } from 'react-native';
 import React, {useContext, useState} from 'react';
 import CustomIcon from '../component/CustomIcon';
-import { contextStore } from '../store/StoreContext';
+import {contextStore} from '../store/StoreContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DetailsScreen = ({route, navigation}: any) => {
-  const {addToCart,cartList}=useContext(contextStore)
-  const {
-    title,
-    description,
-    rating,
-    price,
-    images,
-    discountPercentage,
-  } = route.params.item;
+  const {addToCart, cartList} = useContext(contextStore);
+  const {title, description, rating, price, images, discountPercentage} =
+    route.params.item;
 
   const [selectPic, setSelectedPic] = useState(images[0]);
   const [pic, setPic] = useState(images[0]);
 
-  const handleCart=async (item:any)=>{
-    addToCart(item)
-    const newCart=[...cartList,item]
-    await AsyncStorage.setItem('cart',JSON.stringify(newCart))
-  }
+  const handleCart = async (item: any) => {
+    addToCart(item);
+    const newCart = [...cartList, item];
+    await AsyncStorage.setItem('cart', JSON.stringify(newCart));
+  };
   return (
     <>
       <ScrollView>
@@ -95,16 +89,24 @@ const DetailsScreen = ({route, navigation}: any) => {
         </View>
       </ScrollView>
       <View style={styles.bottomContainer}>
-        <TouchableOpacity style={styles.cartBtn} onPress={()=>{
-          handleCart(route.params.item)
-          navigation.navigate('Cart');
-        }}>
+        <TouchableOpacity
+          style={styles.cartBtn}
+          onPress={() => {
+            handleCart(route.params.item);
+            navigation.navigate('Cart');
+          }}>
           <CustomIcon name="shopping-cart" size={24} color="#2ecc72" />
           <Text style={styles.cartTxt}>Add to cart</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buyBtn} onPress={()=>{
-          navigation.navigate('Payment')
-        }}>
+        <TouchableOpacity
+          style={styles.buyBtn}
+          onPress={() => {
+            navigation.navigate('Payment', {
+              price: Math.round(
+                price - (price * Math.round(discountPercentage)) / 100,
+              ),
+            });
+          }}>
           <CustomIcon
             name="keyboard-double-arrow-right"
             size={24}

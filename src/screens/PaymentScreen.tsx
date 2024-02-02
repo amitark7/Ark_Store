@@ -154,7 +154,7 @@ const PaymentScreen = ({navigation,route}: any) => {
          size={24}
          color="#fff"
        />
-       <Text style={styles.BuyTxt}>Pay Now</Text>
+       <Text style={styles.BuyTxt}>{`Pay With ${selectedPay}`}</Text>
      </TouchableOpacity>
    </View>
    </>
@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   buyBtn: {
-    width: '50%',
+    paddingHorizontal:10,
     borderWidth: 2,
     paddingVertical: 12,
     backgroundColor: '#2ecc72',
