@@ -100,7 +100,9 @@ const CartScreen = ({navigation}: any) => {
           <TouchableOpacity
             style={styles.buyBtn}
             onPress={() => {
-              navigation.navigate('Payment');
+              navigation.navigate('Payment',{
+                price:cartPrice
+              });
             }}>
             <CustomIcon
               name="keyboard-double-arrow-right"

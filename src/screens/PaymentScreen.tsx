@@ -10,8 +10,9 @@ import React, {useState} from 'react';
 import CustomIcon from '../component/CustomIcon';
 import LinearGradient from 'react-native-linear-gradient';
 
-const PaymentScreen = ({navigation}: any) => {
+const PaymentScreen = ({navigation,route}: any) => {
   const [selectedPay, setSelectedPay] = useState('Wallet');
+  const PayAmount=route.params.price
   const PaymentList = [
     {
       name: 'Wallet',
@@ -141,8 +142,8 @@ const PaymentScreen = ({navigation}: any) => {
         ))}
       </View>
     </ScrollView>
-     <View style={[styles.bottomContainer, {marginBottom: TabHeight}]}>
-     <Text style={styles.cartPrice}>${cartPrice}</Text>
+     <View style={styles.bottomContainer}>
+     <Text style={styles.cartPrice}>${PayAmount}</Text>
      <TouchableOpacity
        style={styles.buyBtn}
        onPress={() => {
@@ -286,5 +287,34 @@ const styles = StyleSheet.create({
   PaymentImage: {
     width: 30,
     height: 30,
+  },
+  bottomContainer: {
+    height: 80,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
+  buyBtn: {
+    width: '50%',
+    borderWidth: 2,
+    paddingVertical: 12,
+    backgroundColor: '#2ecc72',
+    borderColor: '#2ecc72',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  BuyTxt: {
+    color: '#fff',
+    fontSize: 17,
+    fontWeight: '500',
+  },
+  cartPrice: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#000',
   },
 });
