@@ -6,11 +6,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import CustomIcon from '../component/CustomIcon';
 import LinearGradient from 'react-native-linear-gradient';
 
 const PaymentScreen = ({navigation}: any) => {
+  const [selectedPay, setSelectedPay] = useState('Wallet');
   const PaymentList = [
     {
       name: 'Wallet',
@@ -47,7 +48,14 @@ const PaymentScreen = ({navigation}: any) => {
         </TouchableOpacity>
       </View>
       <View style={styles.midContainer}>
-        <View style={styles.creditCardContainer}>
+        <View
+          style={[
+            styles.creditCardContainer,
+            {
+              borderColor:
+                selectedPay === 'Credit Card' ? '#2ecc72' : '#99AAAB',
+            },
+          ]}>
           <Text style={styles.cardTitle}>Credit Card</Text>
           <LinearGradient
             start={{x: 0, y: 0}}
@@ -83,30 +91,46 @@ const PaymentScreen = ({navigation}: any) => {
           </LinearGradient>
         </View>
         {PaymentList.map(({name, icon, isIcon}, index) => (
-          <View key={index}>
-            {isIcon ? (
-              <LinearGradient
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
-                colors={['#7B8788', '#000']}
-                style={styles.LinearGradeintWallet}>
-                <View style={styles.WallerRow}>
-                  <CustomIcon name="wallet" color="#2ecc72" size={30} />
+          <TouchableOpacity key={index}>
+            <View >
+              {isIcon ? (
+                <LinearGradient
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 1}}
+                  colors={['#7B8788', '#000']}
+                  style={[
+                    styles.LinearGradeintWallet,
+                    {
+                      borderColor: selectedPay === name ? '#2ecc72' : '#99AAAB',
+                    },
+                  ]}>
+                  <View style={styles.WallerRow}>
+                    <CustomIcon
+                      name="account-balance-wallet"
+                      color="#2ecc72"
+                      size={30}
+                    />
+                    <Text style={styles.PaymentTitle}>{name}</Text>
+                  </View>
+                  <Text style={styles.PaymentPrice}>$ 100.50</Text>
+                </LinearGradient>
+              ) : (
+                <LinearGradient
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 1}}
+                  colors={['#7B8788', '#000']}
+                  style={[
+                    styles.LinearGradeintRegular,
+                    {
+                      borderColor: selectedPay === name ? '#2ecc72' : '#99AAAB',
+                    },
+                  ]}>
+                  <Image source={icon} style={styles.PaymentImage} />
                   <Text style={styles.PaymentTitle}>{name}</Text>
-                </View>
-                <Text style={styles.PaymentPrice}>$ 100.50</Text>
-              </LinearGradient>
-            ) : (
-              <LinearGradient
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
-                colors={['#7B8788', '#000']}
-                style={styles.LinearGradeintRegular}>
-                <Image source={icon} style={styles.PaymentImage} />
-                <Text style={styles.PaymentTitle}>{name}</Text>
-              </LinearGradient>
-            )}
-          </View>
+                </LinearGradient>
+              )}
+            </View>
+          </TouchableOpacity>
         ))}
       </View>
     </ScrollView>
@@ -137,12 +161,14 @@ const styles = StyleSheet.create({
     left: '5%',
     top: '30%',
   },
-  midContainer: {},
+  midContainer: {
+    marginHorizontal: 4,
+  },
   creditCardContainer: {
     paddingHorizontal: 10,
     marginTop: 10,
     borderWidth: 2,
-    marginHorizontal: 10,
+    marginHorizontal: 20,
     borderRadius: 8,
     paddingVertical: 4,
   },
@@ -154,7 +180,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   cardContainer: {
-    marginHorizontal: 4,
     borderRadius: 14,
     paddingVertical: 10,
   },
@@ -199,15 +224,43 @@ const styles = StyleSheet.create({
     marginLeft: -20,
   },
   LinearGradeintWallet: {
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'center'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    marginVertical: 10,
+    height: 60,
+    borderWidth: 3,
+    borderRadius: 40,
+    paddingHorizontal: 30,
   },
   WallerRow: {
-    flexDirection:'row'
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 20,
   },
-  PaymentTitle: {},
-  PaymentPrice: {},
-  LinearGradeintRegular: {},
-  PaymentImage: {},
+  PaymentTitle: {
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  PaymentPrice: {
+    color: '#99AAAB',
+    fontWeight: '400',
+  },
+  LinearGradeintRegular: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    marginVertical: 10,
+    height: 60,
+    borderWidth: 2,
+    borderRadius: 40,
+    paddingHorizontal: 30,
+    gap: 20,
+  },
+  PaymentImage: {
+    width: 30,
+    height: 30,
+  },
 });
