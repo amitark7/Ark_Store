@@ -29,6 +29,10 @@ const ProfileScreen = () => {
       icon: 'favorite',
     },
     {
+      name:'Notification',
+      icon:''
+    },
+    {
       name: 'Help Center',
       icon: 'help-center',
     },
