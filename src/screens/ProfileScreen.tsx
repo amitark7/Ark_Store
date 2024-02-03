@@ -50,7 +50,7 @@ const ProfileScreen = () => {
                   List.map((data,index)=>(
                     <TouchableOpacity style={styles.BtnContainer} key={index}>
                       <CustomIcon name={data.icon} color='#000' size={28}/>
-                      <Text>{data.icon}</Text>
+                      <Text style={styles.BtnTxt}>{data.icon}</Text>
                     </TouchableOpacity>
                   ))
                 }
@@ -100,5 +100,6 @@ const styles = StyleSheet.create({
   },
   BtnContainer:{
 
-  }
+  },
+  BtnTxt:{}
 })
