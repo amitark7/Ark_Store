@@ -73,6 +73,7 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   ScreenContainer: {
     flex: 1,
+    backgroundColor:'#fff'
   },
   ScrollViewFlex: {
     flexGrow: 1,
