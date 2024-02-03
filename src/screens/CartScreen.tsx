@@ -47,6 +47,7 @@ const CartScreen = ({navigation}: any) => {
         <HeaderBar title="Cart" />
         {cartList.length === 0 ? (
           <View style={styles.EmptyContainer}>
+            <Image style={styles.cartImage} source={require('../assets/emptycart.png')}/>
             <Text style={styles.emptyTxt}>Cart is Empty</Text>
           </View>
         ) : (
@@ -130,16 +131,20 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   emptyTxt: {
-    flex:1,
     fontSize: 26,
     fontWeight: 'bold',
     color: '#000',
+    marginTop:20
   },
   imageContainer: {},
   EmptyContainer: {
-    marginTop: 200,
+    marginTop: 250,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  cartImage:{
+    width:150,
+    height:150
   },
   image: {
     width: 140,

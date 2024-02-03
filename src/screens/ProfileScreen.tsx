@@ -16,7 +16,7 @@ const ProfileScreen = () => {
   const List = [
     {
       name: 'My Order',
-      icon: 'shoppingmode',
+      icon: 'history',
     },
     {
       name: 'My Cart',
