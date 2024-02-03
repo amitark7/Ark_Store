@@ -9,8 +9,10 @@ import {
 import React from 'react';
 import HeaderBar from '../component/HeaderBar';
 import CustomIcon from '../component/CustomIcon';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 const ProfileScreen = () => {
+  const TabHeight=useBottomTabBarHeight()
   const List = [
     {
       name: 'My Order',
@@ -30,7 +32,7 @@ const ProfileScreen = () => {
     },
     {
       name:'Notification',
-      icon:''
+      icon:'notifications'
     },
     {
       name: 'Help Center',
@@ -45,7 +47,7 @@ const ProfileScreen = () => {
     <View style={styles.ScreenContainer}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={styles.ScrollViewFlex}>
+        style={[styles.ScrollViewFlex,{marginBottom:TabHeight}]}>
         <HeaderBar title="Profile" />
         <View style={styles.ScrollInnerContainer}>
           <View style={styles.TopContainer}>
