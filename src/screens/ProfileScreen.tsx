@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   ScrollInnerContainer: {
-    marginTop: 20,
+    marginTop: 30,
   },
   TopContainer: {
     flexDirection: 'row',
@@ -110,7 +110,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical:20,
-    borderBottomWidth:1
+    borderBottomWidth:1,
+    borderBottomColor:'#DAE0E2'
   },
   BtnTxt: {
     fontSize:20,
