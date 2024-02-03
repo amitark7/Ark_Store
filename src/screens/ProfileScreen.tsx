@@ -29,7 +29,7 @@ const ProfileScreen = () => {
       icon: 'favorite',
     },
     {
-      name: 'Help Caenter',
+      name: 'Help Center',
       icon: 'help-center',
     },
     {
@@ -58,7 +58,7 @@ const ProfileScreen = () => {
             {List.map((data, index) => (
               <TouchableOpacity style={styles.BtnContainer} key={index}>
                 <CustomIcon name={data.icon} color="#000" size={28} />
-                <Text style={styles.BtnTxt}>{data.icon}</Text>
+                <Text style={styles.BtnTxt}>{data.name}</Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -99,11 +99,23 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
   },
-  subTitle: {},
-  BtnList: {},
+  subTitle: {
+    fontWeight:'400'
+  },
+  BtnList: {
+    paddingHorizontal:20,
+    marginTop:30
+  },
   BtnContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingVertical:20,
+    borderBottomWidth:1
   },
-  BtnTxt: {},
+  BtnTxt: {
+    fontSize:20,
+    fontWeight:'600',
+    color:'#000',
+    marginLeft:20
+  },
 });
