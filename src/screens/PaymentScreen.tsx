@@ -7,15 +7,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import CustomIcon from '../component/CustomIcon';
 import LinearGradient from 'react-native-linear-gradient';
-import {contextStore} from '../store/StoreContext';
+import { itemStore } from '../store/itemStore';
 
 const PaymentScreen = ({navigation, route}: any) => {
   const [selectedPay, setSelectedPay] = useState('Wallet');
+  const OrderHistoryListFromCart=itemStore((state:any)=>state.OrderHistoryListFromCart)
   const PayAmount = route.params.price;
-  const {OrderListFromCartList} = useContext(contextStore);
   const PaymentList = [
     {
       name: 'Wallet',
@@ -151,7 +151,7 @@ const PaymentScreen = ({navigation, route}: any) => {
         <TouchableOpacity
           style={styles.buyBtn}
           onPress={() => {
-            OrderListFromCartList();
+            OrderHistoryListFromCart();
             navigation.navigate('History');
           }}>
           <CustomIcon

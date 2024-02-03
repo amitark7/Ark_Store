@@ -6,20 +6,20 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useContext} from 'react';
-import {contextStore} from '../store/StoreContext';
+import React from 'react';
 import HeaderBar from '../component/HeaderBar';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { itemStore } from '../store/itemStore';
 
 const OrderHistoryList = ({navigation}:any) => {
-  const {OrderHistoryList} = useContext(contextStore);
   const TabHeight=useBottomTabBarHeight()  
+  const OrderHistoryList=itemStore((state:any)=>state.OrderHistoryList)
   
   return (
     <View style={styles.ScreenContainer}>
       <ScrollView style={[styles.ScrollViewFlex]} showsVerticalScrollIndicator={false}>
         <HeaderBar title="Order History" />
-        {OrderHistoryList.map((item: any, index) => (
+        {OrderHistoryList.map((item: any, index:any) => (
           <View style={styles.OrderListContainer} key={index}>
             <View style={styles.TopContainer}>
               <View>
@@ -47,7 +47,7 @@ const OrderHistoryList = ({navigation}:any) => {
                   </View>
                   <View style={styles.innerContainer}>
                     <Text style={styles.title}>
-                      {item.title?.substring(0, 11)}
+                      {item.title}
                     </Text>
                     <Text style={styles.brand}>{item.brand}</Text>
                     <Text style={styles.price}>
@@ -66,7 +66,6 @@ const OrderHistoryList = ({navigation}:any) => {
         ))}
       </ScrollView>
       <View style={[styles.bottomContainer,{marginBottom:TabHeight}]}>
-        <Text style={styles.cartPrice}>$320</Text>
         <TouchableOpacity
           style={styles.buyBtn}
           onPress={() => {
@@ -85,7 +84,7 @@ export default OrderHistoryList;
 const styles = StyleSheet.create({
   ScreenContainer: {
     flex: 1,
-    paddingHorizontal:10
+    paddingHorizontal:10,
   },
   ScrollViewFlex: {
     flexGrow: 1,
@@ -151,7 +150,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   buyBtn: {
-    width: '50%',
+    width: '100%',
     borderWidth: 2,
     paddingVertical: 12,
     backgroundColor: '#2ecc72',
@@ -165,10 +164,5 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 17,
     fontWeight: '500',
-  },
-  cartPrice: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#000',
   },
 });

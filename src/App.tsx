@@ -8,7 +8,6 @@ import CartScreen from './screens/CartScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import PaymentScreen from './screens/PaymentScreen';
-import StoreProvider from './store/StoreContext';
 import CustomIcon from './component/CustomIcon';
 import OrderHistoryList from './screens/OrderHistoryList';
 
@@ -59,7 +58,7 @@ export const Hometabs = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <CustomIcon
-              name="favorite"
+              name="history"
               size={32}
               color={focused ? '#2ecc72' : '#A4B0BD'}
             />
@@ -84,16 +83,14 @@ export const Hometabs = () => {
 };
 const App = () => {
   return (
-    <StoreProvider>
-      <NavigationContainer>
-        <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Hometabs" component={Hometabs} />
-          <Stack.Screen name="Details" component={DetailsScreen} />
-          <Stack.Screen name="Payment" component={PaymentScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </StoreProvider>
+    <NavigationContainer>
+      <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Hometabs" component={Hometabs} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Payment" component={PaymentScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

@@ -7,16 +7,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
-import {contextStore} from '../store/StoreContext';
+import React, {useEffect, useState} from 'react';
 import HeaderBar from '../component/HeaderBar';
 import Separator from '../component/Separator';
 import CustomIcon from '../component/CustomIcon';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {itemStore} from '../store/itemStore';
 
 const CartScreen = ({navigation}: any) => {
-  const {cartList, addInitialCartList} = useContext(contextStore);
+  const cartList=itemStore((state:any)=>state.cartList)
   const TabHeight = useBottomTabBarHeight();
   const [cartPrice, setCartPrice] = useState(0);
 
@@ -34,10 +33,10 @@ const CartScreen = ({navigation}: any) => {
   };
 
   const deleteFromCart = async (id: any) => {
-    let newCart = cartList.filter((item: {id: number}) => item.id !== id);
-    await AsyncStorage.setItem('cart', JSON.stringify(newCart)).then(() =>
-      addInitialCartList(newCart),
-    );
+    // let newCart = cartList.filter((item: {id: number}) => item.id !== id);
+    // await AsyncStorage.setItem('cart', JSON.stringify(newCart)).then(() =>
+    //   addInitialCartList(newCart),
+    // );
   };
   useEffect(() => {
     calculateCartPrice();

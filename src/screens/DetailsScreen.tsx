@@ -8,13 +8,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import CustomIcon from '../component/CustomIcon';
-import {contextStore} from '../store/StoreContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {itemStore} from '../store/itemStore';
 
 const DetailsScreen = ({route, navigation}: any) => {
-  const {addToCart, cartList} = useContext(contextStore);
+  // const {addToCart, cartList} = useContext(contextStore);
+  const addToCart=itemStore((state:any)=>state.addToCart)
   const {title, description, rating, price, images, discountPercentage} =
     route.params.item;
 
@@ -22,9 +22,9 @@ const DetailsScreen = ({route, navigation}: any) => {
   const [pic, setPic] = useState(images[0]);
 
   const handleCart = async (item: any) => {
-    addToCart(item);
-    const newCart = [...cartList, item];
-    await AsyncStorage.setItem('cart', JSON.stringify(newCart));
+    // addToCart(item);
+    // const newCart = [...cartList, item];
+    // await AsyncStorage.setItem('cart', JSON.stringify(newCart));
   };
   return (
     <>
@@ -92,7 +92,7 @@ const DetailsScreen = ({route, navigation}: any) => {
         <TouchableOpacity
           style={styles.cartBtn}
           onPress={() => {
-            handleCart(route.params.item);
+            addToCart(route.params.item);
             navigation.navigate('Cart');
           }}>
           <CustomIcon name="shopping-cart" size={24} color="#2ecc72" />

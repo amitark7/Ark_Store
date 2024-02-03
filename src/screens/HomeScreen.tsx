@@ -8,16 +8,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import HeaderBar from '../component/HeaderBar';
 import CustomIcon from '../component/CustomIcon';
-import {productList} from '../assets/data';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {contextStore} from '../store/StoreContext';
+import {itemStore} from '../store/itemStore';
 
 const HomeScreen = ({navigation}: any) => {
-  const {addInitialCartList, addInitialOrderList} = useContext(contextStore);
+  const ProductList=itemStore((state:any)=>state.ProductList)
   const [category, setCategory] = useState([
     'All',
     'smartphones',
@@ -28,33 +26,18 @@ const HomeScreen = ({navigation}: any) => {
     'home-decoration',
   ]);
   const [selectCategory, setSelectCategory] = useState('All');
+  const [categoryList, setCategoryList] = useState<any>(ProductList);
   const TabHeight = useBottomTabBarHeight();
-  const [categoryList, setCategoryList] = useState<any>(productList);
-
-  const fetchData = async () => {
-    const list = await AsyncStorage.getItem('cart');
-    const HistoryList = await AsyncStorage.getItem('order');
-    
-    if (list) {
-      addInitialCartList(JSON.parse(list));
-    }
-    if (HistoryList) {
-      addInitialOrderList(JSON.parse(HistoryList));
-    }
-  };
 
   const CategoryList = (category: any) => {
     if (category == 'All') {
-      setCategoryList(productList);
+      setCategoryList(ProductList);
     } else {
-      let list = productList.filter(item => item.category == category);
+      let list = ProductList.filter((item: { category: any; }) => item.category == category);
       setCategoryList(list);
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <HeaderBar title="" />
