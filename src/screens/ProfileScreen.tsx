@@ -1,8 +1,38 @@
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import HeaderBar from '../component/HeaderBar'
+import CustomIcon from '../component/CustomIcon'
 
 const ProfileScreen = () => {
+
+  const List=[
+    {
+      name:"My Order",
+      icon:'orders'
+    },
+    {
+      name:"My Cart",
+      icon:'shopping-bag'
+    }
+    ,
+    {
+      name:"My Voucher",
+      icon:'redeem'
+    }
+    ,
+    {
+      name:'WishList',
+      icon:'favorite'
+    }
+    ,{
+      name:'Help Caenter',
+      icon:'help-center'
+    }
+   ,{
+    name:'Setting',
+    icon:'settings'
+   }
+  ]
   return (
     <View style={styles.ScreenContainer}>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.ScrollViewFlex}>
@@ -14,6 +44,16 @@ const ProfileScreen = () => {
                     <Text style={styles.title}>Amit Ark</Text>
                     <Text style={styles.subTitle}>amit@ark.com</Text>
                   </View>
+              </View>
+              <View style={styles.BtnList}>
+                {
+                  List.map((data)=>(
+                    <TouchableOpacity style={styles.BtnContainer}>
+                      <CustomIcon name={data.icon} color='#000' size={28}/>
+                      <Text>{data.icon}</Text>
+                    </TouchableOpacity>
+                  ))
+                }
               </View>
           </View>
       </ScrollView>
@@ -54,5 +94,11 @@ const styles = StyleSheet.create({
   },
   subTitle:{
 
+  },
+  BtnList:{
+
+  },
+  BtnContainer:{
+    
   }
 })
