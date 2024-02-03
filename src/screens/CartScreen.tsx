@@ -109,7 +109,7 @@ const CartScreen = ({navigation}: any) => {
               size={24}
               color="#fff"
             />
-            <Text style={styles.BuyTxt}>Pay Now</Text>
+            <Text style={styles.BuyTxt}>Checkout</Text>
           </TouchableOpacity>
         </View>
       )}

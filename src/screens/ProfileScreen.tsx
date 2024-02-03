@@ -6,41 +6,49 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import HeaderBar from '../component/HeaderBar';
 import CustomIcon from '../component/CustomIcon';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
-const ProfileScreen = () => {
-  const TabHeight=useBottomTabBarHeight()
+const ProfileScreen = ({navigation}:any) => {
+  const TabHeight=useBottomTabBarHeight();
+  const [selectedButton,setSelectedButton]=useState('My Order')
   const List = [
     {
       name: 'My Order',
       icon: 'history',
+      location:'History'
     },
     {
       name: 'My Cart',
       icon: 'shopping-bag',
+      location:'Cart'
     },
     {
       name: 'My Voucher',
       icon: 'redeem',
+      location:'Cart'
     },
     {
       name: 'WishList',
       icon: 'favorite',
+      location:'Cart'
     },
     {
       name:'Notification',
-      icon:'notifications'
+      icon:'notifications',
+      location:'Cart'
     },
     {
       name: 'Help Center',
       icon: 'help-center',
+      location:'Cart'
     },
     {
       name: 'Setting',
       icon: 'settings',
+      location:'Cart'
     },
   ];
   return (
@@ -62,8 +70,11 @@ const ProfileScreen = () => {
           </View>
           <View style={styles.BtnList}>
             {List.map((data, index) => (
-              <TouchableOpacity style={styles.BtnContainer} key={index}>
-                <CustomIcon name={data.icon} color="#000" size={28} />
+              <TouchableOpacity style={styles.BtnContainer} key={index} onPress={()=>{
+                navigation.navigate(`${data.location}`);
+                setSelectedButton(data.name)
+              }}>
+                <CustomIcon name={data.icon} color={selectedButton===data.name?'#2ecc72':'#000'} size={28} />
                 <Text style={styles.BtnTxt}>{data.name}</Text>
               </TouchableOpacity>
             ))}
