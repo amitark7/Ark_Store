@@ -16,6 +16,7 @@ import {itemStore} from '../store/itemStore';
 
 const CartScreen = ({navigation}: any) => {
   const cartList=itemStore((state:any)=>state.cartList)
+  const deleteFromCart=itemStore((state:any)=>state.deleteFromCart)
   const TabHeight = useBottomTabBarHeight();
   const [cartPrice, setCartPrice] = useState(0);
 
