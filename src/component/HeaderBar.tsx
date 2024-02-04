@@ -10,7 +10,7 @@ const HeaderBar:React.FC<HeaderBarPro> = ({
 }) => {
   return (
     <View style={styles.headerContainer}>
-      <Image style={styles.logo} source={require('../assets/logo.png.png')}/>
+      <Image style={styles.logo} source={require('../assets/Logo.png')}/>
       <Text style={styles.title}>{title}</Text>
       <Image style={styles.image} source={require('../assets/Amit.jpeg')}/>
     </View>
@@ -29,8 +29,9 @@ const styles = StyleSheet.create({
     height:60
   },
   logo:{
-    width:50,
-    height:50,
+    width:60,
+    height:60,
+    objectFit:'contain'
   },
   image:{
     width:35,
