@@ -15,8 +15,8 @@ import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {itemStore} from '../store/itemStore';
 
 const HomeScreen = ({navigation}: any) => {
-  const ProductList=itemStore((state:any)=>state.ProductList)
-  const[input,setInput]=useState<string>()
+  const ProductList = itemStore((state: any) => state.ProductList);
+  const [input, setInput] = useState<string>();
   const [category, setCategory] = useState([
     'All',
     'smartphones',
@@ -30,15 +30,17 @@ const HomeScreen = ({navigation}: any) => {
   const [categoryList, setCategoryList] = useState<any>(ProductList);
   const TabHeight = useBottomTabBarHeight();
 
-  const searchHandle=()=>{
-    setInput('')
-  }
+  const searchHandle = () => {
+    setInput('');
+  };
 
   const CategoryList = (category: any) => {
     if (category == 'All') {
       setCategoryList(ProductList);
     } else {
-      let list = ProductList.filter((item: { category: any; }) => item.category == category);
+      let list = ProductList.filter(
+        (item: {category: any}) => item.category == category,
+      );
       setCategoryList(list);
     }
   };
@@ -51,7 +53,7 @@ const HomeScreen = ({navigation}: any) => {
           style={styles.input}
           placeholder="Search"
           placeholderTextColor={'grey'}
-          onChangeText={(value)=>setInput(value)}
+          onChangeText={value => setInput(value)}
           value={input}
         />
         <TouchableOpacity style={styles.searchButton} onPress={searchHandle}>
