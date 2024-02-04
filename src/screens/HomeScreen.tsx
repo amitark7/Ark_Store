@@ -16,6 +16,7 @@ import {itemStore} from '../store/itemStore';
 
 const HomeScreen = ({navigation}: any) => {
   const ProductList=itemStore((state:any)=>state.ProductList)
+  const[input,setInput]=useState<string>()
   const [category, setCategory] = useState([
     'All',
     'smartphones',
@@ -46,6 +47,7 @@ const HomeScreen = ({navigation}: any) => {
           style={styles.input}
           placeholder="Search"
           placeholderTextColor={'grey'}
+          onChangeText={(value)=>setInput(value)}
         />
         <TouchableOpacity style={styles.searchButton}>
           <CustomIcon name="search" size={30} color="#616C6F" />

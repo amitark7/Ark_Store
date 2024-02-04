@@ -13,7 +13,7 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 const ProfileScreen = ({navigation}:any) => {
   const TabHeight=useBottomTabBarHeight();
-  const [selectedButton,setSelectedButton]=useState('My Order')
+  const [selectedButton,setSelectedButton]=useState('')
   const List = [
     {
       name: 'My Order',
