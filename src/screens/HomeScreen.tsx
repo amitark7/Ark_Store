@@ -30,6 +30,11 @@ const HomeScreen = ({navigation}: any) => {
   const [categoryList, setCategoryList] = useState<any>(ProductList);
   const TabHeight = useBottomTabBarHeight();
 
+  const searchHandle=()=>{
+    console.log(input);
+    
+  }
+
   const CategoryList = (category: any) => {
     if (category == 'All') {
       setCategoryList(ProductList);
