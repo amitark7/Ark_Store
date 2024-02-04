@@ -10,6 +10,7 @@ import DetailsScreen from './screens/DetailsScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import CustomIcon from './component/CustomIcon';
 import OrderHistoryList from './screens/OrderHistoryList';
+import SplashScreen from './screens/SplashScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -86,6 +87,7 @@ const App = () => {
     <NavigationContainer>
       <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
       <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name='Splash' component={SplashScreen}/>
         <Stack.Screen name="Hometabs" component={Hometabs} />
         <Stack.Screen name="Details" component={DetailsScreen} />
         <Stack.Screen name="Payment" component={PaymentScreen} />
