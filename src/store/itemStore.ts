@@ -52,6 +52,9 @@ export const itemStore = create(
             state.cartList = [];
           }),
         ),
+      deleteFromCart:(id:any)=>set(produce(state=>{
+        state.cartList=state.cartList.filter((item: { id: any; })=>item.id!==id)
+      }))
     }),
     {
       name: 'item-store',
