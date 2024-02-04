@@ -31,8 +31,7 @@ const HomeScreen = ({navigation}: any) => {
   const TabHeight = useBottomTabBarHeight();
 
   const searchHandle=()=>{
-    console.log(input);
-    
+    setInput('')
   }
 
   const CategoryList = (category: any) => {
@@ -53,8 +52,9 @@ const HomeScreen = ({navigation}: any) => {
           placeholder="Search"
           placeholderTextColor={'grey'}
           onChangeText={(value)=>setInput(value)}
+          value={input}
         />
-        <TouchableOpacity style={styles.searchButton}>
+        <TouchableOpacity style={styles.searchButton} onPress={searchHandle}>
           <CustomIcon name="search" size={30} color="#616C6F" />
         </TouchableOpacity>
       </View>
