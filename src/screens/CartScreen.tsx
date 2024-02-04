@@ -32,12 +32,6 @@ const CartScreen = ({navigation}: any) => {
     setCartPrice(CartPrice);
   };
 
-  const deleteFromCart = async (id: any) => {
-    // let newCart = cartList.filter((item: {id: number}) => item.id !== id);
-    // await AsyncStorage.setItem('cart', JSON.stringify(newCart)).then(() =>
-    //   addInitialCartList(newCart),
-    // );
-  };
   useEffect(() => {
     calculateCartPrice();
   }, [cartList]);
