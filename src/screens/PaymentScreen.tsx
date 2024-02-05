@@ -42,9 +42,10 @@ const PaymentScreen = ({navigation, route}: any) => {
   ];
   const ButtonHandler=()=>{
     setShowanimatison(true)
-    navigation.navigate('History');
+    OrderHistoryListFromCart();
     setTimeout(()=>{
       setShowanimatison(false)
+      navigation.navigate('History');
     },2000)
   }
 
@@ -354,8 +355,8 @@ const styles = StyleSheet.create({
   },
   Lotti: {
    flex:1,
-   height:150,
-   width:150
+   height:300,
+   width:300
   }  
 })
 

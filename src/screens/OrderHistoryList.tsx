@@ -230,8 +230,8 @@ const styles = StyleSheet.create({
   },
   Lotti: {
    flex:1,
-   height:150,
-   width:150
+   height:200,
+   width:200
   },
 });
 
