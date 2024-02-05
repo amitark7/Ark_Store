@@ -13,6 +13,7 @@ import Separator from '../component/Separator';
 import CustomIcon from '../component/CustomIcon';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {itemStore} from '../store/itemStore';
+import LottieView from 'lottie-react-native';
 
 const CartScreen = ({navigation}: any) => {
   const cartList=itemStore((state:any)=>state.cartList)
@@ -42,7 +43,7 @@ const CartScreen = ({navigation}: any) => {
         <HeaderBar title="Cart" />
         {cartList.length === 0 ? (
           <View style={styles.EmptyContainer}>
-            <Image style={styles.cartImage} source={require('../assets/emptycart.png')}/>
+            <LottieView source={require('../assets/lotti/cart.json')}/>
             <Text style={styles.emptyTxt}>Cart is Empty</Text>
           </View>
         ) : (

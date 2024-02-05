@@ -15,6 +15,7 @@
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "immer": "^10.0.3",
+    "lottie-react-native": "^6.6.0",
     "react": "18.2.0",
     "react-native": "0.73.3",
     "react-native-linear-gradient": "^2.8.3",
