@@ -10,6 +10,7 @@ import React from 'react';
 import HeaderBar from '../component/HeaderBar';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {itemStore} from '../store/itemStore';
+import LottieView from 'lottie-react-native';
 
 const OrderHistoryList = ({navigation}: any) => {
   const TabHeight = useBottomTabBarHeight();
@@ -23,10 +24,7 @@ const OrderHistoryList = ({navigation}: any) => {
         <HeaderBar title="Order History" />
         {OrderHistoryList.length == 0 ? (
           <View style={styles.EmptyContainer}>
-            <Image
-              style={styles.cartImage}
-              source={require('../assets/emptycart.png')}
-            />
+            <LottieView style={styles.cartImage} source={require('../assets/lotti/cart.json')} autoPlay loop/>
             <Text style={styles.emptyTxt}>No Order History</Text>
           </View>
         ) : (
@@ -191,7 +189,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cartImage: {
-    width: 150,
-    height: 150,
+    width: 200,
+    height: 200,
   },
 });
