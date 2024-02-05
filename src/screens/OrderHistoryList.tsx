@@ -15,8 +15,14 @@ import LottieView from 'lottie-react-native';
 const OrderHistoryList = ({navigation}: any) => {
   const TabHeight = useBottomTabBarHeight();
   const OrderHistoryList = itemStore((state: any) => state.OrderHistoryList);
-  const [showAnimation, setShowanimatison] = useState(true);
+  const [showAnimation, setShowanimatison] = useState(false);
 
+  const ButtonHandler=()=>{
+    setShowanimatison(true)
+    setTimeout(()=>{
+      setShowanimatison(false)
+    },3000)
+  }
   return (
     <>
       {showAnimation ? (
@@ -25,7 +31,7 @@ const OrderHistoryList = ({navigation}: any) => {
             style={styles.Lotti}
             source={require('../assets/lotti/successful.json')}
             autoPlay
-            loop
+            loop={false}
           />
         </View>
       ) : (
@@ -97,10 +103,7 @@ const OrderHistoryList = ({navigation}: any) => {
           <View style={[styles.bottomContainer, {marginBottom: TabHeight}]}>
             <TouchableOpacity
               style={styles.buyBtn}
-              onPress={() => {
-                // OrderListFromCartList();
-                // navigation.navigate('History');
-              }}>
+              onPress={ButtonHandler}>
               <Text style={styles.BuyTxt}>Download</Text>
             </TouchableOpacity>
           </View>
@@ -218,10 +221,11 @@ const styles = StyleSheet.create({
     flex: 1,
     top:0,
     left:0,
-    right:0
+    right:0,
+    bottom:0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#0000000000',
+    backgroundColor: '#000000',
   },
   Lotti: {
    flex:1,
