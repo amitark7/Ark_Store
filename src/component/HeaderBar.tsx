@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     height:60
   },
   logo:{
-    width:60,
-    height:60,
+    width:55,
+    height:55,
     objectFit:'contain'
   },
   image:{

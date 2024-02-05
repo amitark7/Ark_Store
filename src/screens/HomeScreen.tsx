@@ -16,7 +16,7 @@ import {itemStore} from '../store/itemStore';
 
 const HomeScreen = ({navigation}: any) => {
   const ProductList = itemStore((state: any) => state.ProductList);
-  const [input, setInput] = useState<string>();
+  const [input, setInput] = useState<string>('');
   const [category, setCategory] = useState([
     'All',
     'smartphones',
@@ -28,10 +28,24 @@ const HomeScreen = ({navigation}: any) => {
   ]);
   const [selectCategory, setSelectCategory] = useState('All');
   const [categoryList, setCategoryList] = useState<any>(ProductList);
+  const [isSearch, setIsSearch] = useState<any>(true);
   const TabHeight = useBottomTabBarHeight();
 
   const searchHandle = () => {
-    setInput('');
+    if (input?.length > 0) {
+      setIsSearch(!isSearch);
+      let List = categoryList.filter(
+        (item: any) => item.category == input?.toLowerCase(),
+      );
+      setCategoryList(List);
+    }
+  };
+
+  const removehandle = () => {
+    setIsSearch(!isSearch);
+    setCategoryList(ProductList);
+    setSelectCategory("All")
+    setInput('')
   };
 
   const CategoryList = (category: any) => {
@@ -56,9 +70,15 @@ const HomeScreen = ({navigation}: any) => {
           onChangeText={value => setInput(value)}
           value={input}
         />
-        <TouchableOpacity style={styles.searchButton} onPress={searchHandle}>
-          <CustomIcon name="search" size={30} color="#616C6F" />
-        </TouchableOpacity>
+        {isSearch ? (
+          <TouchableOpacity style={styles.searchButton} onPress={removehandle}>
+            <CustomIcon name="close" size={30} color="#616C6F" />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.searchButton} onPress={searchHandle}>
+            <CustomIcon name="search" size={30} color="#616C6F" />
+          </TouchableOpacity>
+        )}
       </View>
       <View style={styles.TitleContainer}>
         <Text style={styles.titleTxt}>Find the best</Text>
@@ -102,6 +122,11 @@ const HomeScreen = ({navigation}: any) => {
             {marginBottom: TabHeight},
           ]}
           data={categoryList}
+          ListEmptyComponent={
+            <View style={styles.EmptyContainer}>
+              <Text style={styles.EmptyTxt}>No Product Found</Text>
+            </View>
+          }
           key={''}
           numColumns={2}
           scrollEnabled={false}
@@ -251,4 +276,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#2ecc72',
   },
+  EmptyContainer:{
+    alignItems:'center',
+    marginTop:100
+  },
+  EmptyTxt:{
+    fontSize:20
+  }
 });
