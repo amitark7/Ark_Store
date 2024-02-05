@@ -43,7 +43,7 @@ const CartScreen = ({navigation}: any) => {
         <HeaderBar title="Cart" />
         {cartList.length === 0 ? (
           <View style={styles.EmptyContainer}>
-            <LottieView style={styles.cartImage} source={require('../assets/lotti/cart.json')} autoPlay loop/>
+            <LottieView style={styles.cartImage} source={require('../assets/lotti/emptycart.json')} autoPlay loop speed={0.5}/>
             <Text style={styles.emptyTxt}>Cart is Empty</Text>
           </View>
         ) : (
