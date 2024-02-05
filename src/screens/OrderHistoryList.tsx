@@ -21,7 +21,7 @@ const OrderHistoryList = ({navigation}: any) => {
     setShowanimatison(true)
     setTimeout(()=>{
       setShowanimatison(false)
-    },3000)
+    },2000)
   }
   return (
     <>
@@ -225,11 +225,13 @@ const styles = StyleSheet.create({
     bottom:0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000000',
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    zIndex:1000
   },
   Lotti: {
    flex:1,
-   height:200,
-   width:200
+   height:150,
+   width:150
   },
 });
+

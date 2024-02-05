@@ -11,9 +11,11 @@ import React, {useState} from 'react';
 import CustomIcon from '../component/CustomIcon';
 import LinearGradient from 'react-native-linear-gradient';
 import { itemStore } from '../store/itemStore';
+import LottieView from 'lottie-react-native';
 
 const PaymentScreen = ({navigation, route}: any) => {
   const [selectedPay, setSelectedPay] = useState('Wallet');
+  const [showAnimation, setShowanimatison] = useState(false);
   const OrderHistoryListFromCart=itemStore((state:any)=>state.OrderHistoryListFromCart)
   const PayAmount = route.params.price;
   const PaymentList = [
@@ -38,9 +40,28 @@ const PaymentScreen = ({navigation, route}: any) => {
       isIcon: false,
     },
   ];
+  const ButtonHandler=()=>{
+    setShowanimatison(true)
+    navigation.navigate('History');
+    setTimeout(()=>{
+      setShowanimatison(false)
+    },2000)
+  }
 
   return (
     <>
+     {showAnimation ? (
+        <View style={styles.LottiConatiner}>
+          <LottieView
+            style={styles.Lotti}
+            source={require('../assets/lotti/payment.json')}
+            autoPlay
+            loop={false}
+          />
+        </View>
+      ) : (
+        <></>
+      )}
       <ScrollView style={styles.Container}>
         <View style={styles.TopContainer}>
           <Text style={styles.HeaderTxt}>Payments</Text>
@@ -151,8 +172,7 @@ const PaymentScreen = ({navigation, route}: any) => {
         <TouchableOpacity
           style={styles.buyBtn}
           onPress={() => {
-            OrderHistoryListFromCart();
-            navigation.navigate('History');
+            ButtonHandler();            
           }}>
           <CustomIcon
             name="keyboard-double-arrow-right"
@@ -165,8 +185,6 @@ const PaymentScreen = ({navigation, route}: any) => {
     </>
   );
 };
-
-export default PaymentScreen;
 
 const styles = StyleSheet.create({
   Container: {
@@ -322,4 +340,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#000',
   },
-});
+  LottiConatiner: {
+    position: 'absolute',
+    flex: 1,
+    top:0,
+    left:0,
+    right:0,
+    bottom:0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    zIndex:1000
+  },
+  Lotti: {
+   flex:1,
+   height:150,
+   width:150
+  }  
+})
+
+export default PaymentScreen;
