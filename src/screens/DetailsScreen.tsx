@@ -19,12 +19,6 @@ const DetailsScreen = ({route, navigation}: any) => {
 
   const [selectPic, setSelectedPic] = useState(images[0]);
   const [pic, setPic] = useState(images[0]);
-
-  const handleCart = async (item: any) => {
-    // addToCart(item);
-    // const newCart = [...cartList, item];
-    // await AsyncStorage.setItem('cart', JSON.stringify(newCart));
-  };
   return (
     <>
       <ScrollView>
