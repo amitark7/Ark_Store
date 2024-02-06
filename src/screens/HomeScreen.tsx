@@ -15,7 +15,7 @@ import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {itemStore} from '../store/itemStore';
 
 const HomeScreen = ({navigation}: any) => {
-  
+
   const ProductList = itemStore((state: any) => state.ProductList);
   const [input, setInput] = useState<string>('');
   const [category, setCategory] = useState([
@@ -59,7 +59,6 @@ const HomeScreen = ({navigation}: any) => {
       setCategoryList(list);
     }
   };
-
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <HeaderBar title="" />
