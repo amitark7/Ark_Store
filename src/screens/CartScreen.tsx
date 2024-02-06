@@ -22,6 +22,7 @@ const CartScreen = ({navigation}: any) => {
   const [cartPrice, setCartPrice] = useState(0);
 
   const calculateCartPrice = () => {
+    
     let CartPrice = 0;
     for (let i = 0; i < cartList.length; i++) {
       CartPrice += Math.round(
