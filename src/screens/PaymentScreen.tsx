@@ -48,7 +48,6 @@ const PaymentScreen = ({navigation, route}: any) => {
       navigation.navigate('History');
     },2000)
   }
-
   return (
     <>
      {showAnimation ? (
