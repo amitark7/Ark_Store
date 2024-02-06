@@ -13,7 +13,6 @@ import CustomIcon from '../component/CustomIcon';
 import {itemStore} from '../store/itemStore';
 
 const DetailsScreen = ({route, navigation}: any) => {
-  // const {addToCart, cartList} = useContext(contextStore);
   const addToCart=itemStore((state:any)=>state.addToCart)
   const {title, description, rating, price, images, discountPercentage} =
     route.params.item;
