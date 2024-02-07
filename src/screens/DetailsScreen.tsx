@@ -19,6 +19,7 @@ const DetailsScreen = ({route, navigation}: any) => {
 
   const [selectPic, setSelectedPic] = useState(images[0]);
   const [pic, setPic] = useState(images[0]);
+  
   return (
     <>
       <ScrollView>
