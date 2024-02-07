@@ -40,6 +40,7 @@ const PaymentScreen = ({navigation, route}: any) => {
       isIcon: false,
     },
   ];
+  
   const ButtonHandler=()=>{
     setShowanimatison(true)
     OrderHistoryListFromCart();
