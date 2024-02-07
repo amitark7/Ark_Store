@@ -23,7 +23,6 @@ const OrderHistoryList = ({navigation}: any) => {
       setShowanimatison(false)
     },2000)
   }
-
   return (
     <>
       {showAnimation ? (
